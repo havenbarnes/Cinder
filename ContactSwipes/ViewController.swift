@@ -17,7 +17,27 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        initUI()
+        
+        if let card = Bundle.main.loadNibNamed("ContactCardView", owner: nil, options: nil)?
+            .first as! ContactCardView! {
+            cardStackContainerView.addSubview(card)
+            card.translatesAutoresizingMaskIntoConstraints = false
+            
+            let attributes: [NSLayoutAttribute] = [.left, .right, .bottom]
+            for attribute in attributes {
+                cardStackContainerView.addConstraint(NSLayoutConstraint(item: cardStackContainerView, attribute: attribute, relatedBy: .equal, toItem: card, attribute: attribute
+                    , multiplier: 1, constant: 0))
+            }
+            
+        }
+    
+    }
+    
+    func initUI() {
+        keepButton.layer.cornerRadius = keepButton.frame.width / 2
+        deleteButton.layer.cornerRadius = deleteButton.frame.width / 2
     }
 
     @IBAction func deleteButtonPressed(_ sender: Any) {

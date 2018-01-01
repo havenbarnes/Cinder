@@ -7,15 +7,44 @@
 //
 
 import UIKit
+import Contacts
 
 class ContactCardView: UIView {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    
+    let colors = [UIColor("F03434"),
+                  UIColor("663399"),
+                  UIColor("22A7F0"),
+                  UIColor("26C281"),
+                  UIColor("F9690E"),
+                  UIColor("26C281"),
+                  UIColor("36D7B7"),
+                  UIColor("96281B")]
+    
+    var contactIndex: Int!
+    var contact: CNContact!
+    
+    @IBOutlet weak var initialLabelBackgroundView: UIView!
+    
+    @IBOutlet weak var contactImageView: UIImageView!
+    
+    @IBOutlet weak var initialsLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
+    
+    @IBOutlet weak var phoneSectionLabel: UILabel!
+    @IBOutlet weak var phoneLabel: UILabel!
+    
+    @IBOutlet weak var emailSectionLabel: UILabel!
+    @IBOutlet weak var emailLabel: UILabel!
+    
+    override func layoutSubviews() {
+        //initialsLabel.text = contact.initials()
+        layer.cornerRadius = 12
+        initialLabelBackgroundView.layer.cornerRadius = initialLabelBackgroundView.frame.width / 2
     }
-    */
-
+    
+    func applyColor() {
+        backgroundColor = colors[contactIndex]
+        initialLabelBackgroundView.backgroundColor = colors[contactIndex].darker()
+    }
+    
 }
