@@ -8,7 +8,20 @@
 
 import UIKit
 import Contacts
- 
+
+extension MutableCollection where Index == Int {
+    /// Shuffle the elements of collection in-place.
+    mutating func shuffle() {
+        if count < 2 { return }
+        
+        for i in startIndex ..< endIndex - 1 {
+            let j = Int(arc4random_uniform(UInt32(endIndex - i))) + i
+            if i != j {
+                self.swapAt(i, j)
+            }
+        }
+    }
+}
 
 extension CNContact {
     

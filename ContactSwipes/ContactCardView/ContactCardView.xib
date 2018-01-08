@@ -14,7 +14,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ContactCardView" customModule="ContactSwipes" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="355" height="296"/>
+            <rect key="frame" x="0.0" y="0.0" width="355" height="291"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a0e-i1-0nG">
@@ -26,7 +26,7 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5xD-w5-trx">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5xD-w5-trx">
                             <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
                         </imageView>
                     </subviews>
@@ -44,7 +44,7 @@
                         <constraint firstItem="5xD-w5-trx" firstAttribute="top" secondItem="a0e-i1-0nG" secondAttribute="top" id="yRT-C1-VJR"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" translatesAutoresizingMaskIntoConstraints="NO" id="eZO-C6-ZA9">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.65000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="eZO-C6-ZA9">
                     <rect key="frame" x="130" y="45" width="209" height="41"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -56,7 +56,7 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+1 (123) 456-7890" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" translatesAutoresizingMaskIntoConstraints="NO" id="nXk-eJ-340">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+1 (123) 456-7890" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="none" minimumScaleFactor="0.65000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="nXk-eJ-340">
                     <rect key="frame" x="20" y="158" width="315" height="41"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -68,8 +68,8 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+1 (123) 456-7890" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" translatesAutoresizingMaskIntoConstraints="NO" id="HRK-YO-6m5">
-                    <rect key="frame" x="20" y="243" width="315" height="41"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="loooongemail@email.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="none" minimumScaleFactor="0.65000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="HRK-YO-6m5">
+                    <rect key="frame" x="20" y="240.5" width="315" height="41"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
@@ -77,7 +77,7 @@
             </subviews>
             <color key="backgroundColor" red="1" green="0.47335242543492551" blue="0.28138656284967511" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="HRK-YO-6m5" secondAttribute="bottom" constant="12" id="1Ng-nL-W1I"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="HRK-YO-6m5" secondAttribute="bottom" constant="10" id="1Ng-nL-W1I"/>
                 <constraint firstItem="nVd-ch-Zbt" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="2X3-GV-Iuq"/>
                 <constraint firstItem="nXk-eJ-340" firstAttribute="leading" secondItem="nVd-ch-Zbt" secondAttribute="leading" id="3TW-5P-4YV"/>
                 <constraint firstItem="a0e-i1-0nG" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="9Td-eN-9rz"/>
@@ -87,7 +87,7 @@
                 <constraint firstItem="a0e-i1-0nG" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="IpY-WN-mX4"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="nVd-ch-Zbt" secondAttribute="trailing" constant="20" id="Nsc-uR-tzK"/>
                 <constraint firstItem="eZO-C6-ZA9" firstAttribute="centerY" secondItem="a0e-i1-0nG" secondAttribute="centerY" id="O0l-Fx-ylI"/>
-                <constraint firstItem="HRK-YO-6m5" firstAttribute="top" secondItem="bI3-5k-W2n" secondAttribute="bottom" constant="7.5" id="UxB-lx-aMs"/>
+                <constraint firstItem="HRK-YO-6m5" firstAttribute="top" secondItem="bI3-5k-W2n" secondAttribute="bottom" constant="5" id="UxB-lx-aMs"/>
                 <constraint firstItem="HRK-YO-6m5" firstAttribute="leading" secondItem="bI3-5k-W2n" secondAttribute="leading" id="WNi-AF-9JO"/>
                 <constraint firstItem="bI3-5k-W2n" firstAttribute="trailing" secondItem="nXk-eJ-340" secondAttribute="trailing" id="Z1H-9L-tKx"/>
                 <constraint firstItem="nVd-ch-Zbt" firstAttribute="top" secondItem="a0e-i1-0nG" secondAttribute="bottom" constant="20" id="cXx-QE-qup"/>

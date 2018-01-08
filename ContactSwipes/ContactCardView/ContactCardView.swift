@@ -10,13 +10,12 @@ import UIKit
 import Contacts
 
 class ContactCardView: UIView {
-    
+
     let colors = [UIColor("F03434"),
                   UIColor("663399"),
                   UIColor("22A7F0"),
                   UIColor("26C281"),
                   UIColor("F9690E"),
-                  UIColor("26C281"),
                   UIColor("36D7B7"),
                   UIColor("96281B")]
     
@@ -37,9 +36,42 @@ class ContactCardView: UIView {
     @IBOutlet weak var emailLabel: UILabel!
     
     override func layoutSubviews() {
-        //initialsLabel.text = contact.initials()
+        setupContact()
+        applyColor()
+        
         layer.cornerRadius = 12
+        contactImageView.layer.cornerRadius = contactImageView.frame.width / 2
+        contactImageView.clipsToBounds = true
         initialLabelBackgroundView.layer.cornerRadius = initialLabelBackgroundView.frame.width / 2
+    }
+    
+    fileprivate func setupContact() {
+        
+        initialsLabel.text = contact.initials()
+        
+        nameLabel.text = contact.givenName + " " + contact.familyName
+        
+        if contact.imageDataAvailable {
+            let image = UIImage(data: contact.thumbnailImageData!)
+            contactImageView.image = image
+        }
+        
+        if contact.phoneNumbers.count == 0 {
+            phoneLabel.text = "No Phone"
+            phoneLabel.alpha = 0.4
+            phoneSectionLabel.alpha = 0.4
+        } else {
+            phoneLabel.text = contact.phoneNumbers.first!.value.stringValue
+        }
+        
+        if contact.emailAddresses.count == 0 {
+            emailLabel.text = "No Email"
+            emailLabel.alpha = 0.4
+            emailSectionLabel.alpha = 0.4
+        } else {
+            emailLabel.text = contact.emailAddresses.first!.value as String
+        }
+        
     }
     
     func applyColor() {
