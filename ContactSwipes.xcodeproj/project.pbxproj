@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		810F926E200AB32300BEC27C /* CardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810F926D200AB32300BEC27C /* CardManager.swift */; };
 		8173BB092002E7E700F09D7A /* ContactStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8173BB082002E7E700F09D7A /* ContactStore.swift */; };
 		81CE02F01FF97F1800CFE7A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CE02EF1FF97F1800CFE7A8 /* AppDelegate.swift */; };
 		81CE02F21FF97F1800CFE7A8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CE02F11FF97F1800CFE7A8 /* ViewController.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		810F926D200AB32300BEC27C /* CardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardManager.swift; sourceTree = "<group>"; };
 		8173BB082002E7E700F09D7A /* ContactStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactStore.swift; sourceTree = "<group>"; };
 		81CE02EC1FF97F1800CFE7A8 /* ContactSwipes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContactSwipes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81CE02EF1FF97F1800CFE7A8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 			children = (
 				81CE02EF1FF97F1800CFE7A8 /* AppDelegate.swift */,
 				81CE02F11FF97F1800CFE7A8 /* ViewController.swift */,
+				810F926D200AB32300BEC27C /* CardManager.swift */,
 				8173BB082002E7E700F09D7A /* ContactStore.swift */,
 				81CE03081FFACCCC00CFE7A8 /* Extensions.swift */,
 				81CE02F31FF97F1800CFE7A8 /* Main.storyboard */,
@@ -160,6 +163,7 @@
 				81CE03091FFACCCC00CFE7A8 /* Extensions.swift in Sources */,
 				81CE03051FF9808800CFE7A8 /* ContactCardView.swift in Sources */,
 				81CE02F21FF97F1800CFE7A8 /* ViewController.swift in Sources */,
+				810F926E200AB32300BEC27C /* CardManager.swift in Sources */,
 				81CE02F01FF97F1800CFE7A8 /* AppDelegate.swift in Sources */,
 				8173BB092002E7E700F09D7A /* ContactStore.swift in Sources */,
 			);

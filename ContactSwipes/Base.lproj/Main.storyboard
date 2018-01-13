@@ -19,10 +19,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Wc6-Nv-ETG">
-                                <rect key="frame" x="169" y="295.5" width="37" height="37"/>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Wc6-Nv-ETG">
+                                <rect key="frame" x="169" y="325.5" width="37" height="37"/>
                                 <color key="color" red="0.86366580309999996" green="0.86366580309999996" blue="0.86366580309999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SOJ-5g-X68" userLabel="Redo Button">
+                                <rect key="frame" x="147" y="303.5" width="80" height="80"/>
+                                <color key="backgroundColor" red="0.86366580309999996" green="0.86366580309999996" blue="0.86366580309999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="LpF-Ke-oqj"/>
+                                    <constraint firstAttribute="width" secondItem="SOJ-5g-X68" secondAttribute="height" multiplier="1:1" id="jes-0d-azP"/>
+                                </constraints>
+                                <state key="normal" title="Redo"/>
+                                <connections>
+                                    <action selector="redoButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xad-Xj-Ioc"/>
+                                </connections>
+                            </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="b8I-ax-mqI">
                                 <rect key="frame" x="92.5" y="557" width="190" height="80"/>
                                 <subviews>
@@ -58,21 +70,27 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pNf-HC-Y8N" userLabel="ContactCardArea">
-                                <rect key="frame" x="22" y="100" width="331" height="427"/>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pNf-HC-Y8N" userLabel="ContactCardArea">
+                                <rect key="frame" x="22" y="160" width="331" height="367"/>
                                 <color key="backgroundColor" red="0.94385917438041211" green="0.95320431472081224" blue="0.95320431472081224" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" priority="250" constant="500" id="lZA-bL-0Hn"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Wc6-Nv-ETG" firstAttribute="centerY" secondItem="pNf-HC-Y8N" secondAttribute="centerY" id="19r-sp-bgM"/>
                             <constraint firstItem="Wc6-Nv-ETG" firstAttribute="centerX" secondItem="pNf-HC-Y8N" secondAttribute="centerX" id="Iqw-ut-OUS"/>
-                            <constraint firstItem="pNf-HC-Y8N" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="80" id="SkR-WY-aRh"/>
-                            <constraint firstItem="b8I-ax-mqI" firstAttribute="top" secondItem="pNf-HC-Y8N" secondAttribute="bottom" constant="30" id="cWk-4f-FBN"/>
+                            <constraint firstItem="pNf-HC-Y8N" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="80" id="SkR-WY-aRh"/>
+                            <constraint firstItem="b8I-ax-mqI" firstAttribute="top" relation="greaterThanOrEqual" secondItem="pNf-HC-Y8N" secondAttribute="bottom" constant="30" id="cWk-4f-FBN"/>
+                            <constraint firstItem="SOJ-5g-X68" firstAttribute="centerY" secondItem="pNf-HC-Y8N" secondAttribute="centerY" id="gXO-AF-kYS"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="b8I-ax-mqI" secondAttribute="bottom" constant="30" id="j9U-23-uPk"/>
                             <constraint firstItem="pNf-HC-Y8N" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="22" id="kEw-bC-fIM"/>
+                            <constraint firstItem="SOJ-5g-X68" firstAttribute="centerX" secondItem="pNf-HC-Y8N" secondAttribute="centerX" id="kxH-wc-LA1"/>
                             <constraint firstItem="b8I-ax-mqI" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="lI7-sU-0n4"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="pNf-HC-Y8N" secondAttribute="trailing" constant="22" id="m4b-f8-Ah9"/>
+                            <constraint firstItem="pNf-HC-Y8N" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="sKF-6P-lOF"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -80,6 +98,8 @@
                         <outlet property="cardStackContainerView" destination="pNf-HC-Y8N" id="APj-An-85Q"/>
                         <outlet property="deleteButton" destination="B9a-X5-bZT" id="Xg3-43-F6D"/>
                         <outlet property="keepButton" destination="LCf-SO-Axg" id="7RP-iR-Ijt"/>
+                        <outlet property="progressIndicator" destination="Wc6-Nv-ETG" id="ytO-gL-UZj"/>
+                        <outlet property="redoButton" destination="SOJ-5g-X68" id="Xec-Ql-GWq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

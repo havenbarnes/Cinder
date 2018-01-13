@@ -30,6 +30,7 @@ class ContactStore {
     }
     
     func loadContacts(_ completion: () -> ()) {
+        contacts.removeAll()
         
         let request = CNContactFetchRequest(keysToFetch:
             [CNContactGivenNameKey as CNKeyDescriptor,
@@ -40,10 +41,13 @@ class ContactStore {
              CNContactEmailAddressesKey as CNKeyDescriptor])
         try? cnContactStore.enumerateContacts(with: request) { (contact, successful) in
             self.contacts.append(contact)
-            print(contact.givenName)
         }
         
         contacts.shuffle()
         completion()
+    }
+    
+    func delete(_ contact: CNContact) {
+        print("Deleting Contact...")
     }
 }
