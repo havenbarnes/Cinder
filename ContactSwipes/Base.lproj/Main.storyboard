@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -10,21 +10,26 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Futura.ttc">
+            <string>Futura-Bold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ContactSwipes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Wc6-Nv-ETG">
-                                <rect key="frame" x="169" y="325.5" width="37" height="37"/>
+                                <rect key="frame" x="188.66666666666666" y="340" width="37" height="37"/>
                                 <color key="color" red="0.86366580309999996" green="0.86366580309999996" blue="0.86366580309999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SOJ-5g-X68" userLabel="Redo Button">
-                                <rect key="frame" x="147" y="303.5" width="80" height="80"/>
+                                <rect key="frame" x="166.66666666666666" y="318" width="80" height="80"/>
                                 <color key="backgroundColor" red="0.86366580309999996" green="0.86366580309999996" blue="0.86366580309999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="LpF-Ke-oqj"/>
@@ -36,7 +41,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="b8I-ax-mqI">
-                                <rect key="frame" x="92.5" y="557" width="190" height="80"/>
+                                <rect key="frame" x="112" y="626" width="190" height="80"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B9a-X5-bZT">
                                         <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
@@ -71,26 +76,33 @@
                                 </subviews>
                             </stackView>
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pNf-HC-Y8N" userLabel="ContactCardArea">
-                                <rect key="frame" x="22" y="160" width="331" height="367"/>
+                                <rect key="frame" x="20" y="98" width="374" height="520"/>
                                 <color key="backgroundColor" red="0.94385917438041211" green="0.95320431472081224" blue="0.95320431472081224" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" priority="250" constant="500" id="lZA-bL-0Hn"/>
-                                </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contactual" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="N7o-oT-jPd">
+                                <rect key="frame" x="108" y="40" width="198" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="TdC-dA-fDb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="35"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Wc6-Nv-ETG" firstAttribute="centerY" secondItem="pNf-HC-Y8N" secondAttribute="centerY" id="19r-sp-bgM"/>
                             <constraint firstItem="Wc6-Nv-ETG" firstAttribute="centerX" secondItem="pNf-HC-Y8N" secondAttribute="centerX" id="Iqw-ut-OUS"/>
-                            <constraint firstItem="pNf-HC-Y8N" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="80" id="SkR-WY-aRh"/>
-                            <constraint firstItem="b8I-ax-mqI" firstAttribute="top" relation="greaterThanOrEqual" secondItem="pNf-HC-Y8N" secondAttribute="bottom" constant="30" id="cWk-4f-FBN"/>
+                            <constraint firstItem="pNf-HC-Y8N" firstAttribute="top" secondItem="N7o-oT-jPd" secondAttribute="bottom" constant="8" id="bhb-Px-JeN"/>
+                            <constraint firstItem="b8I-ax-mqI" firstAttribute="top" secondItem="pNf-HC-Y8N" secondAttribute="bottom" constant="8" id="cWk-4f-FBN"/>
                             <constraint firstItem="SOJ-5g-X68" firstAttribute="centerY" secondItem="pNf-HC-Y8N" secondAttribute="centerY" id="gXO-AF-kYS"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="b8I-ax-mqI" secondAttribute="bottom" constant="30" id="j9U-23-uPk"/>
-                            <constraint firstItem="pNf-HC-Y8N" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="22" id="kEw-bC-fIM"/>
+                            <constraint firstItem="pNf-HC-Y8N" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="kEw-bC-fIM"/>
                             <constraint firstItem="SOJ-5g-X68" firstAttribute="centerX" secondItem="pNf-HC-Y8N" secondAttribute="centerX" id="kxH-wc-LA1"/>
                             <constraint firstItem="b8I-ax-mqI" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="lI7-sU-0n4"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="pNf-HC-Y8N" secondAttribute="trailing" constant="22" id="m4b-f8-Ah9"/>
-                            <constraint firstItem="pNf-HC-Y8N" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="sKF-6P-lOF"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="pNf-HC-Y8N" secondAttribute="trailing" constant="20" id="m4b-f8-Ah9"/>
+                            <constraint firstItem="N7o-oT-jPd" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="pE6-b2-4fK"/>
+                            <constraint firstItem="N7o-oT-jPd" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="qJ2-Bt-iys"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

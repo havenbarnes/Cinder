@@ -11,7 +11,7 @@ import Contacts
 
 class ViewController: UIViewController, ContactStoreDelegate, CardManagerDelegate {
     
-    private let animationTime = 0.4
+    private let animationTime = 0.3
     private var cardManager: CardManager!
     private var contactStore: ContactStore!
     
@@ -80,7 +80,7 @@ class ViewController: UIViewController, ContactStoreDelegate, CardManagerDelegat
             cardStackContainerView.addSubview(card)
             card.translatesAutoresizingMaskIntoConstraints = false
             
-            let attributes: [NSLayoutAttribute] = [.left, .right, .top]
+            let attributes: [NSLayoutAttribute] = [.left, .right, .centerY]
             for attribute in attributes {
                 cardStackContainerView.addConstraint(NSLayoutConstraint(item: cardStackContainerView,
                                                                         attribute: attribute,
@@ -122,19 +122,38 @@ class ViewController: UIViewController, ContactStoreDelegate, CardManagerDelegat
     }
     
     func delete(_ card: ContactCardView) {
-        disableButtons()
-        UIView.animate(withDuration: animationTime, animations: {
-            var frameUpdate = card.frame
-            frameUpdate.origin.x = -card.frame.width
-            card.frame = frameUpdate
-        }) { (complete) in
-            card.removeFromSuperview()
-            self.enableButtons()
+        let deleteAction = {
+            self.disableButtons()
+            UIView.animate(withDuration: self.animationTime, animations: {
+                var frameUpdate = card.frame
+                frameUpdate.origin.x = -card.frame.width
+                card.frame = frameUpdate
+            }) { (complete) in
+                card.removeFromSuperview()
+                self.enableButtons()
+            }
+            
+            self.contactStore.delete(card.contact)
+            
+            self.cardManager.update()
         }
         
-        contactStore.delete(card.contact)
         
-        cardManager.update()
+        let title = "Delete Contact?"
+        let message = "Are you sure you want to delete \(card.contact.givenName)'s contact?"
+        let alert = UIAlertController(title: title,
+                                      message: message,
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: {
+            action in
+            deleteAction()
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {
+            action in
+            
+            self.draggedCardShouldReturn(card: card)
+        }))
+        present(alert, animated: true)
     }
     
     func keep(_ card: ContactCardView) {
@@ -161,7 +180,7 @@ class ViewController: UIViewController, ContactStoreDelegate, CardManagerDelegat
         UIView.animate(withDuration: animationTime, animations: {
             var frameUpdate = card.frame
             frameUpdate.origin.x = 0
-            frameUpdate.origin.y = 0
+            frameUpdate.origin.y = self.cardStackContainerView.frame.height / 2 - frameUpdate.height / 2
             card.frame = frameUpdate
         }) { (complete) in
             self.enableButtons()

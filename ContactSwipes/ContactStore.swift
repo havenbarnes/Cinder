@@ -49,5 +49,9 @@ class ContactStore {
     
     func delete(_ contact: CNContact) {
         print("Deleting Contact...")
+        let mutableContact = contact.mutableCopy() as! CNMutableContact
+        let request = CNSaveRequest()
+        request.delete(mutableContact)
+        try? cnContactStore.execute(request)
     }
 }

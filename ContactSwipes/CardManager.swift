@@ -55,7 +55,7 @@ class CardManager {
         }
         view.bringSubview(toFront: sender.view!)
         let translation = sender.translation(in: self.view)
-        sender.view!.center = CGPoint(x: sender.view!.center.x + translation.x, y: sender.view!.center.y + translation.y)
+        sender.view!.center = CGPoint(x: sender.view!.center.x + translation.x * 1.2, y: sender.view!.center.y + translation.y)
         sender.setTranslation(CGPoint.zero, in: self.view)
         
         // Check For Drag Completion
