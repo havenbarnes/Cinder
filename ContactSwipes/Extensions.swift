@@ -26,10 +26,18 @@ extension MutableCollection where Index == Int {
 extension CNContact {
     
     func initials() -> String {
-        let firstIndex = givenName.index(givenName.startIndex, offsetBy: 1)
-        let lastIndex = familyName.index(familyName.startIndex, offsetBy: 1)
-        let firstInitial = "\(givenName[..<firstIndex])"
-        let lastInitial = "\(familyName[..<lastIndex])"
+        var firstInitial = ""
+        var lastInitial = ""
+        
+        if givenName != "" {
+            let firstIndex = givenName.index(givenName.startIndex, offsetBy: 1)
+            firstInitial = "\(givenName[..<firstIndex])"
+        }
+        
+        if familyName != "" {
+            let lastIndex = familyName.index(familyName.startIndex, offsetBy: 1)
+            lastInitial = "\(familyName[..<lastIndex])"
+        }
         
         return firstInitial + lastInitial
     }

@@ -76,7 +76,7 @@ class ContactCardView: UIView {
     
     func applyColor() {
         backgroundColor = colors[contactIndex % colors.count]
-        initialLabelBackgroundView.backgroundColor = colors[contactIndex].darker()
+        initialLabelBackgroundView.backgroundColor = colors[contactIndex % colors.count].darker()
     }
     
 }

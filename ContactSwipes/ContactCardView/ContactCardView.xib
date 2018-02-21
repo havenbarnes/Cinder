@@ -104,7 +104,7 @@
                 <outlet property="emailSectionLabel" destination="bI3-5k-W2n" id="s8F-wv-1hh"/>
                 <outlet property="initialLabelBackgroundView" destination="a0e-i1-0nG" id="Y6F-Cs-RNL"/>
                 <outlet property="initialsLabel" destination="fo6-Fl-lBh" id="KZn-Vb-IDb"/>
-                <outlet property="nameLabel" destination="eZO-C6-ZA9" id="nsr-bV-55G"/>
+                <outlet property="nameLabel" destination="eZO-C6-ZA9" id="fLl-PW-ejW"/>
                 <outlet property="phoneLabel" destination="nXk-eJ-340" id="jBS-Fm-EtX"/>
                 <outlet property="phoneSectionLabel" destination="nVd-ch-Zbt" id="udM-z0-Jx4"/>
             </connections>

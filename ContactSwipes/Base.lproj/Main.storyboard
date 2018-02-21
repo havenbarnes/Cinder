@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina5_5" orientation="portrait">
+    <device id="retina3_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -21,15 +21,15 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ContactSwipes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Wc6-Nv-ETG">
-                                <rect key="frame" x="188.66666666666666" y="340" width="37" height="37"/>
+                                <rect key="frame" x="141.5" y="212" width="37" height="37"/>
                                 <color key="color" red="0.86366580309999996" green="0.86366580309999996" blue="0.86366580309999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SOJ-5g-X68" userLabel="Redo Button">
-                                <rect key="frame" x="166.66666666666666" y="318" width="80" height="80"/>
+                                <rect key="frame" x="119.5" y="190" width="80" height="80"/>
                                 <color key="backgroundColor" red="0.86366580309999996" green="0.86366580309999996" blue="0.86366580309999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="LpF-Ke-oqj"/>
@@ -41,7 +41,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="b8I-ax-mqI">
-                                <rect key="frame" x="112" y="626" width="190" height="80"/>
+                                <rect key="frame" x="65" y="370" width="190" height="80"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B9a-X5-bZT">
                                         <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
@@ -76,11 +76,11 @@
                                 </subviews>
                             </stackView>
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pNf-HC-Y8N" userLabel="ContactCardArea">
-                                <rect key="frame" x="20" y="98" width="374" height="520"/>
+                                <rect key="frame" x="20" y="98" width="280" height="264"/>
                                 <color key="backgroundColor" red="0.94385917438041211" green="0.95320431472081224" blue="0.95320431472081224" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contactual" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="N7o-oT-jPd">
-                                <rect key="frame" x="108" y="40" width="198" height="50"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contactless" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="N7o-oT-jPd">
+                                <rect key="frame" x="55.5" y="40" width="209" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="TdC-dA-fDb"/>
                                 </constraints>
