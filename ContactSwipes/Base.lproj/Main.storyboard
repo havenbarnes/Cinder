@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina3_5" orientation="portrait">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -21,52 +21,72 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ContactSwipes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contactless" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="N7o-oT-jPd">
+                                <rect key="frame" x="83" y="64" width="209" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="TdC-dA-fDb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="35"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Wc6-Nv-ETG">
-                                <rect key="frame" x="141.5" y="212" width="37" height="37"/>
+                                <rect key="frame" x="169" y="383" width="37" height="37"/>
                                 <color key="color" red="0.86366580309999996" green="0.86366580309999996" blue="0.86366580309999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SOJ-5g-X68" userLabel="Redo Button">
-                                <rect key="frame" x="119.5" y="190" width="80" height="80"/>
-                                <color key="backgroundColor" red="0.86366580309999996" green="0.86366580309999996" blue="0.86366580309999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="157" y="371" width="60" height="60"/>
+                                <color key="backgroundColor" red="0.6507177982233503" green="0.6507177982233503" blue="0.6507177982233503" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="LpF-Ke-oqj"/>
+                                    <constraint firstAttribute="width" constant="60" id="LpF-Ke-oqj"/>
                                     <constraint firstAttribute="width" secondItem="SOJ-5g-X68" secondAttribute="height" multiplier="1:1" id="jes-0d-azP"/>
                                 </constraints>
-                                <state key="normal" title="Redo"/>
+                                <inset key="imageEdgeInsets" minX="14" minY="14" maxX="14" maxY="14"/>
+                                <state key="normal" title=" " image="redo"/>
                                 <connections>
                                     <action selector="redoButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xad-Xj-Ioc"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All Done!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="sOa-5e-uHq">
+                                <rect key="frame" x="137.66666666666666" y="441" width="99" height="26"/>
+                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pNf-HC-Y8N" userLabel="ContactCardArea">
+                                <rect key="frame" x="20" y="122" width="335" height="558"/>
+                                <color key="backgroundColor" red="0.94385917438041211" green="0.95320431472081224" blue="0.95320431472081224" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="b8I-ax-mqI">
-                                <rect key="frame" x="65" y="370" width="190" height="80"/>
+                                <rect key="frame" x="112.66666666666669" y="688" width="150" height="60"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B9a-X5-bZT">
-                                        <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B9a-X5-bZT">
+                                        <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                         <color key="backgroundColor" red="0.94665592908859253" green="0.3866037130355835" blue="0.11425257474184036" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="B9a-X5-bZT" secondAttribute="height" multiplier="1:1" id="aal-TI-6jz"/>
-                                            <constraint firstAttribute="height" constant="80" id="jzE-3U-Mj8"/>
+                                            <constraint firstAttribute="height" constant="60" id="jzE-3U-Mj8"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
-                                        <state key="normal" title="Delete">
+                                        <inset key="imageEdgeInsets" minX="17" minY="17" maxX="17" maxY="17"/>
+                                        <state key="normal" title=" " image="trash">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="deleteButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QjR-EZ-yee"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LCf-SO-Axg">
-                                        <rect key="frame" x="110" y="0.0" width="80" height="80"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LCf-SO-Axg">
+                                        <rect key="frame" x="89.999999999999986" y="0.0" width="60.000000000000014" height="60"/>
                                         <color key="backgroundColor" red="0.27987527847290039" green="0.86305409669876099" blue="0.057978354394435883" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="80" id="2Kb-yb-Fb1"/>
+                                            <constraint firstAttribute="height" constant="60" id="2Kb-yb-Fb1"/>
                                             <constraint firstAttribute="width" secondItem="LCf-SO-Axg" secondAttribute="height" multiplier="1:1" id="Hp1-S8-75A"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
-                                        <state key="normal" title="Keep">
+                                        <inset key="imageEdgeInsets" minX="14" minY="14" maxX="14" maxY="14"/>
+                                        <state key="normal" title=" " image="keep">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
@@ -75,28 +95,17 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pNf-HC-Y8N" userLabel="ContactCardArea">
-                                <rect key="frame" x="20" y="98" width="280" height="264"/>
-                                <color key="backgroundColor" red="0.94385917438041211" green="0.95320431472081224" blue="0.95320431472081224" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contactless" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="N7o-oT-jPd">
-                                <rect key="frame" x="55.5" y="40" width="209" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="TdC-dA-fDb"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="35"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Wc6-Nv-ETG" firstAttribute="centerY" secondItem="pNf-HC-Y8N" secondAttribute="centerY" id="19r-sp-bgM"/>
+                            <constraint firstItem="sOa-5e-uHq" firstAttribute="centerX" secondItem="SOJ-5g-X68" secondAttribute="centerX" id="5Hk-L9-oZJ"/>
+                            <constraint firstItem="sOa-5e-uHq" firstAttribute="top" secondItem="SOJ-5g-X68" secondAttribute="bottom" constant="10" id="ANZ-Pc-mGl"/>
                             <constraint firstItem="Wc6-Nv-ETG" firstAttribute="centerX" secondItem="pNf-HC-Y8N" secondAttribute="centerX" id="Iqw-ut-OUS"/>
                             <constraint firstItem="pNf-HC-Y8N" firstAttribute="top" secondItem="N7o-oT-jPd" secondAttribute="bottom" constant="8" id="bhb-Px-JeN"/>
                             <constraint firstItem="b8I-ax-mqI" firstAttribute="top" secondItem="pNf-HC-Y8N" secondAttribute="bottom" constant="8" id="cWk-4f-FBN"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="b8I-ax-mqI" secondAttribute="bottom" constant="30" id="fTp-UH-FyX"/>
                             <constraint firstItem="SOJ-5g-X68" firstAttribute="centerY" secondItem="pNf-HC-Y8N" secondAttribute="centerY" id="gXO-AF-kYS"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="b8I-ax-mqI" secondAttribute="bottom" constant="30" id="j9U-23-uPk"/>
                             <constraint firstItem="pNf-HC-Y8N" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="kEw-bC-fIM"/>
                             <constraint firstItem="SOJ-5g-X68" firstAttribute="centerX" secondItem="pNf-HC-Y8N" secondAttribute="centerX" id="kxH-wc-LA1"/>
                             <constraint firstItem="b8I-ax-mqI" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="lI7-sU-0n4"/>
@@ -119,4 +128,9 @@
             <point key="canvasLocation" x="136.80000000000001" y="132.68365817091455"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="keep" width="42" height="42"/>
+        <image name="redo" width="42" height="42"/>
+        <image name="trash" width="42" height="42"/>
+    </resources>
 </document>

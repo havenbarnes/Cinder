@@ -25,7 +25,12 @@ class ViewController: UIViewController, ContactStoreDelegate, CardManagerDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setNeedsStatusBarAppearanceUpdate()
         initUI()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     func initUI() {
@@ -192,13 +197,13 @@ class ViewController: UIViewController, ContactStoreDelegate, CardManagerDelegat
     }
     
     func allCardsDragged() {
-        let title = "Good Job!"
-        let message = "You've cleaned out all of your contacts! Press redo to go through them again."
-        let alert = UIAlertController(title: title,
-                                      message: message,
-                                      preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-        present(alert, animated: true)
+//        let title = "All Done!"
+//        let message = "You've cleaned out all of your contacts! Press redo to go through them again."
+//        let alert = UIAlertController(title: title,
+//                                      message: message,
+//                                      preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+//        present(alert, animated: true)
         cardStackContainerView.isUserInteractionEnabled = false
     }
     
