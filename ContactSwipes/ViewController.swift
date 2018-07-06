@@ -11,7 +11,7 @@ import Contacts
 
 class ViewController: UIViewController, ContactStoreDelegate, CardManagerDelegate {
     
-    private let animationTime = 0.3
+    private let animationTime = 0.4
     private var cardManager: CardManager!
     private var contactStore: ContactStore!
     
@@ -60,7 +60,7 @@ class ViewController: UIViewController, ContactStoreDelegate, CardManagerDelegat
     
     func setupCards(for contacts: [CNContact]) {
         cardStackContainerView.isUserInteractionEnabled = true
-        
+
         var cards: [ContactCardView] = []
         for i in 0..<contacts.count {
             let contact = contacts[i]
@@ -87,6 +87,12 @@ class ViewController: UIViewController, ContactStoreDelegate, CardManagerDelegat
                     attribute: attribute, relatedBy: .equal, toItem: card, attribute: attribute,
                     multiplier: 1, constant: 0))
             }
+            
+            card.center.y = view.frame.height + card.frame.height
+            UIView.animate(withDuration: self.animationTime, delay: 0.1 * Double(index),
+                options: .curveEaseOut, animations: {
+                self.view.layoutIfNeeded()
+            }, completion: nil)
             
             return card
         } else {

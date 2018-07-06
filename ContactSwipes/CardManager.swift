@@ -57,16 +57,16 @@ class CardManager {
         
         // Transition X
         let translation = sender.translation(in: self.view)
-        sender.view!.center.x = sender.view!.center.x + translation.x * 1.2
+        sender.view!.center.x = sender.view!.center.x + translation.x
         
         // Rotate relative to translation
         let distanceSwiped = UIScreen.main.bounds.width / 2.0 - sender.view!.center.x
         let percentSwipedX = (distanceSwiped / UIScreen.main.bounds.width) * 0.5
         let rotationAngle = -(CGFloat.pi / 2) * percentSwipedX
-        sender.view!.transform = CGAffineTransform(rotationAngle: rotationAngle)
+        sender.view!.transform = CGAffineTransform(rotationAngle: rotationAngle + 0.05)
         
         // Opacity transition
-        sender.view!.alpha = 1 - abs(percentSwipedX * 1.3)
+        sender.view!.alpha = 1 - abs(percentSwipedX)
         
         // Reset translation for easier calculation
         sender.setTranslation(CGPoint.zero, in: self.view)
