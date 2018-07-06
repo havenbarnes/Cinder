@@ -29,10 +29,6 @@ class ViewController: UIViewController, ContactStoreDelegate, CardManagerDelegat
         initUI()
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-    
     func initUI() {
         keepButton.layer.cornerRadius = keepButton.frame.width / 2
         deleteButton.layer.cornerRadius = deleteButton.frame.width / 2
@@ -79,7 +75,7 @@ class ViewController: UIViewController, ContactStoreDelegate, CardManagerDelegat
     
     func generateCard(_ contact: CNContact, index: Int) -> ContactCardView? {
         if let card = Bundle.main.loadNibNamed("ContactCardView", owner: nil, options: nil)?
-            .first as! ContactCardView! {
+            .first as! ContactCardView? {
             card.contact = contact
             card.contactIndex = index
             cardStackContainerView.addSubview(card)
@@ -88,11 +84,8 @@ class ViewController: UIViewController, ContactStoreDelegate, CardManagerDelegat
             let attributes: [NSLayoutAttribute] = [.left, .right, .centerY]
             for attribute in attributes {
                 cardStackContainerView.addConstraint(NSLayoutConstraint(item: cardStackContainerView,
-                                                                        attribute: attribute,
-                                                                        relatedBy: .equal,
-                                                                        toItem: card,
-                                                                        attribute: attribute
-                    , multiplier: 1, constant: 0))
+                    attribute: attribute, relatedBy: .equal, toItem: card, attribute: attribute,
+                    multiplier: 1, constant: 0))
             }
             
             return card
@@ -126,24 +119,35 @@ class ViewController: UIViewController, ContactStoreDelegate, CardManagerDelegat
         deleteButton.isEnabled = false
     }
     
-    func delete(_ card: ContactCardView) {
-        let deleteAction = {
-            self.disableButtons()
-            UIView.animate(withDuration: self.animationTime, animations: {
-                var frameUpdate = card.frame
-                frameUpdate.origin.x = -card.frame.width
-                card.frame = frameUpdate
-            }) { (complete) in
-                card.removeFromSuperview()
-                self.enableButtons()
-            }
-            
-            self.contactStore.delete(card.contact)
-            
-            self.cardManager.update()
+    func keep(_ card: ContactCardView) {
+        disableButtons()
+        UIView.animate(withDuration: animationTime, animations: {
+            card.transform = CGAffineTransform(rotationAngle: CGFloat.pi / 5)
+            card.center.x = self.view.frame.width + card.frame.width / 2
+            card.alpha = 0
+        }) { (complete) in
+            card.removeFromSuperview()
+            self.enableButtons()
         }
         
-        
+        cardManager.update()
+    }
+    
+    func delete(_ card: ContactCardView) {
+        self.disableButtons()
+        UIView.animate(withDuration: self.animationTime, animations: {
+            card.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 5)
+            card.center.x = -card.frame.width / 2
+            card.alpha = 0
+        }) { (complete) in
+            card.removeFromSuperview()
+            self.enableButtons()
+        }
+        self.contactStore.delete(card.contact)
+        self.cardManager.update()
+    }
+    
+    func showDeleteConfirmation(for card: ContactCardView) {
         let title = "Delete Contact?"
         let message = "Are you sure you want to delete \(card.contact.givenName)'s contact?"
         let alert = UIAlertController(title: title,
@@ -151,28 +155,13 @@ class ViewController: UIViewController, ContactStoreDelegate, CardManagerDelegat
                                       preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: {
             action in
-            deleteAction()
+            self.showDeleteConfirmation(for: card)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {
             action in
-            
             self.draggedCardShouldReturn(card: card)
         }))
         present(alert, animated: true)
-    }
-    
-    func keep(_ card: ContactCardView) {
-        disableButtons()
-        UIView.animate(withDuration: animationTime, animations: {
-            var frameUpdate = card.frame
-            frameUpdate.origin.x = self.view.frame.width
-            card.frame = frameUpdate
-        }) { (complete) in
-            card.removeFromSuperview()
-            self.enableButtons()
-        }
-        
-        cardManager.update()
     }
     
     // MARK: - CardManagerDelegate
@@ -183,27 +172,22 @@ class ViewController: UIViewController, ContactStoreDelegate, CardManagerDelegat
     
     func draggedCardShouldReturn(card: ContactCardView) {
         UIView.animate(withDuration: animationTime, animations: {
+            card.transform = CGAffineTransform(rotationAngle: 0)
             var frameUpdate = card.frame
             frameUpdate.origin.x = 0
             frameUpdate.origin.y = self.cardStackContainerView.frame.height / 2 - frameUpdate.height / 2
             card.frame = frameUpdate
+            card.alpha = 1
         }) { (complete) in
             self.enableButtons()
         }
     }
     
-    func dragDidCompletePastBoundary(card: ContactCardView, shouldKeep: Bool) {
-        shouldKeep ? keep(card) : delete(card)
+    func dragDidCompletePastBoundary(card: ContactCardView, isRight: Bool) {
+        isRight ? keep(card) : showDeleteConfirmation(for: card)
     }
     
     func allCardsDragged() {
-//        let title = "All Done!"
-//        let message = "You've cleaned out all of your contacts! Press redo to go through them again."
-//        let alert = UIAlertController(title: title,
-//                                      message: message,
-//                                      preferredStyle: .alert)
-//        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-//        present(alert, animated: true)
         cardStackContainerView.isUserInteractionEnabled = false
     }
     
@@ -213,7 +197,7 @@ class ViewController: UIViewController, ContactStoreDelegate, CardManagerDelegat
         guard let topCard = cardManager.top else {
             return
         }
-        delete(topCard)
+        showDeleteConfirmation(for: topCard)
     }
     
     @IBAction func keepButtonPressed(_ sender: Any) {
