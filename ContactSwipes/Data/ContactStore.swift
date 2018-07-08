@@ -6,7 +6,7 @@
 //  Copyright © 2018 Haven Barnes. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import Contacts
 
 protocol ContactStoreDelegate {
@@ -17,12 +17,22 @@ class ContactStore {
     
     static let shared = ContactStore()
     
+    static let colors = [UIColor("F03434"),
+                  UIColor("663399"),
+                  UIColor("22A7F0"),
+                  UIColor("26C281"),
+                  UIColor("F9690E"),
+                  UIColor("36D7B7"),
+                  UIColor("96281B")]
+    
     var delegate: ContactStoreDelegate?
     
     var cardStack: [CNContact] = []
-    private var contacts: [String : CNContact] = [:]
     // TODO: Persist trashed
     private var trashed: [String : CNContact] = [:]
+    private var contacts: [String : CNContact] = [:]
+    
+    
     
     private var cnContactStore = CNContactStore()
     private var accessStatus: CNAuthorizationStatus? = nil
@@ -67,14 +77,37 @@ class ContactStore {
         updateStack()
     }
     
-    var trashEmpty: Bool {
-        return trashed.count == 0
-    }
-    
     func trash(_ contact: CNContact) {
         trashed[contact.identifier] = contact
         contacts.removeValue(forKey: contact.identifier)
         updateStack()
+    }
+    
+    var trashEmpty: Bool {
+        return trashed.count == 0
+    }
+    
+    func getTrash() -> [CNContact] {
+        return Array(trashed.values)
+    }
+    
+    func removeFromTrash(_ contact: CNContact) {
+        trashed.removeValue(forKey: contact.identifier)
+    }
+    
+    func delete(_ contact: CNContact) {
+        print("Deleting Contact...")
+        let mutableContact = contact.mutableCopy() as! CNMutableContact
+        let request = CNSaveRequest()
+        request.delete(mutableContact)
+        try? cnContactStore.execute(request)
+    }
+    
+    func emptyTrash() {
+        for contact in trashed.values {
+            delete(contact)
+        }
+        trashed.removeAll()
     }
     
     func updateStack() {
@@ -86,11 +119,5 @@ class ContactStore {
         print("Card Stack After: \(cardStack.map { $0.identifier })")
     }
     
-    func delete(_ contact: CNContact) {
-        print("Deleting Contact...")
-        let mutableContact = contact.mutableCopy() as! CNMutableContact
-        let request = CNSaveRequest()
-        request.delete(mutableContact)
-        try? cnContactStore.execute(request)
-    }
+   
 }

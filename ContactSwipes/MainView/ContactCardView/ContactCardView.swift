@@ -10,14 +10,6 @@ import UIKit
 import Contacts
 
 class ContactCardView: UIView {
-
-    let colors = [UIColor("F03434"),
-                  UIColor("663399"),
-                  UIColor("22A7F0"),
-                  UIColor("26C281"),
-                  UIColor("F9690E"),
-                  UIColor("36D7B7"),
-                  UIColor("96281B")]
     
     var contactIndex: Int!
     var contact: CNContact!
@@ -45,7 +37,7 @@ class ContactCardView: UIView {
         initialLabelBackgroundView.layer.cornerRadius = initialLabelBackgroundView.frame.width / 2
     }
     
-    fileprivate func setupContact() {
+    private func setupContact() {
         
         initialsLabel.text = contact.initials()
         
@@ -74,9 +66,9 @@ class ContactCardView: UIView {
         
     }
     
-    func applyColor() {
-        backgroundColor = colors[contactIndex % colors.count]
-        initialLabelBackgroundView.backgroundColor = colors[contactIndex % colors.count].darker()
+    private func applyColor() {
+        backgroundColor = ContactStore.colors[contactIndex % ContactStore.colors.count]
+        initialLabelBackgroundView.backgroundColor = ContactStore.colors[contactIndex % ContactStore.colors.count].darker()
     }
     
 }

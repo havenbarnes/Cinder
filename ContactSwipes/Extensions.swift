@@ -9,6 +9,13 @@
 import UIKit
 import Contacts
 
+extension UIViewController {
+    func present(_ identifier: String) {
+        let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: identifier)
+        self.present(viewController, animated: true, completion: nil)
+    }
+}
+
 extension MutableCollection where Index == Int {
     /// Shuffle the elements of collection in-place.
     mutating func shuffle() {

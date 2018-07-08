@@ -11,8 +11,9 @@ import Contacts
 
 class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDelegate {
     
-    private var shouldLoadStack = true
     private let animationTime = 0.4
+    private var animating = false
+    private var shouldLoadStack = true
     private var cardManager: CardManager!
     private var contactStore: ContactStore!
     
@@ -20,6 +21,7 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var keepButton: UIButton!
     @IBOutlet weak var trashButton: UIButton!
+    @IBOutlet weak var trashButtonLeading: NSLayoutConstraint!
     @IBOutlet weak var redoButton: UIButton!
     @IBOutlet weak var progressIndicator: UIActivityIndicatorView!
     
@@ -37,7 +39,15 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
         keepButton.layer.cornerRadius = keepButton.frame.width / 2
         deleteButton.layer.cornerRadius = deleteButton.frame.width / 2
         redoButton.layer.cornerRadius = redoButton.frame.width / 2
-        trashButton.layer.cornerRadius = trashButton.frame.width / 2
+        let path = UIBezierPath(roundedRect: trashButton.bounds,
+                                byRoundingCorners:[.topRight, .bottomRight],
+                                cornerRadii: CGSize(width: trashButton.frame.height / 2,
+                                                    height:  trashButton.frame.height / 2))
+        
+        let maskLayer = CAShapeLayer()
+        maskLayer.path = path.cgPath
+        trashButton.layer.mask = maskLayer
+        trashButtonLeading.constant = -trashButton.frame.width // Start off screen
         redoButton.isHidden = true
     }
 
@@ -45,7 +55,9 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
         super.viewDidAppear(animated)
         
         if contactStore.trashEmpty {
-            trashButton.backgroundColor = UIColor.gray.withAlphaComponent(0.15)
+            dismissTrashButtonIfNeeded()
+        } else {
+            presentTrashButtonIfNeeded()
         }
         
         guard shouldLoadStack else { return }
@@ -130,27 +142,31 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
         }
     }
     
-    func enableButtons() {
-        keepButton.isEnabled = true
-        deleteButton.isEnabled = true
-        trashButton.isEnabled = true
+    func dismissTrashButtonIfNeeded() {
+        guard trashButton.center.x == 0 else { return }
+        trashButtonLeading.constant = -trashButton.frame.width
+        UIView.animate(withDuration: animationTime / 2, delay: animationTime, options: .curveEaseIn, animations: {
+            self.view.layoutSubviews()
+        }, completion: nil)
     }
     
-    func disableButtons() {
-        keepButton.isEnabled = false
-        deleteButton.isEnabled = false
-        trashButton.isEnabled = false
+    func presentTrashButtonIfNeeded() {
+        guard trashButton.center.x < 0 else { return }
+        trashButtonLeading.constant = 0
+        UIView.animate(withDuration: animationTime / 2, delay: animationTime, options: .curveEaseOut, animations: {
+            self.view.layoutSubviews()
+        }, completion: nil)
     }
 
     func keep(_ card: ContactCardView) {
-        disableButtons()
+        animating = true
         UIView.animate(withDuration: animationTime, animations: {
             card.transform = CGAffineTransform(rotationAngle: CGFloat.pi / 5)
             card.center.x = self.view.frame.width + card.frame.width / 2
             card.alpha = 0
         }) { (complete) in
             card.removeFromSuperview()
-            self.enableButtons()
+            self.animating = false
         }
         
         contactStore.keep(card.contact)
@@ -158,15 +174,17 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
     }
     
     func trash(_ card: ContactCardView) {
-        self.disableButtons()
+        
+        presentTrashButtonIfNeeded()
+        
+        animating = true
         UIView.animate(withDuration: self.animationTime, animations: {
-            self.trashButton.backgroundColor = UIColor.red
             card.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 5)
             card.center.x = -card.frame.width / 2
             card.alpha = 0
         }) { (complete) in
             card.removeFromSuperview()
-            self.enableButtons()
+            self.animating = false
         }
         
         contactStore.trash(card.contact)
@@ -176,7 +194,7 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
     // MARK: - CardManagerDelegate
     
     func dragStarted() {
-        disableButtons()
+        animating = true
     }
     
     func draggedCardShouldReturn(card: ContactCardView) {
@@ -188,7 +206,7 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
             card.frame = frameUpdate
             card.alpha = 1
         }) { (complete) in
-            self.enableButtons()
+            self.animating = false
         }
     }
     
@@ -201,8 +219,13 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
     }
     
     // MARK: - Button Actions
-
+    @IBAction func trashButtonPressed(_ sender: Any) {
+        guard !animating else { return }
+        present("TrashViewController")
+    }
+    
     @IBAction func deleteButtonPressed(_ sender: Any) {
+        guard !animating else { return }
         guard let topCard = cardManager.top else {
             return
         }
@@ -210,6 +233,7 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
     }
     
     @IBAction func keepButtonPressed(_ sender: Any) {
+        guard !animating else { return }
         guard let topCard = cardManager.top else {
             return
         }
@@ -217,6 +241,7 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
     }
     
     @IBAction func redoButtonPressed(_ sender: Any) {
+        guard !animating else { return }
         shouldLoadStack = true
         viewDidAppear(false)
     }
