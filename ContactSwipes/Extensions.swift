@@ -24,7 +24,7 @@ extension MutableCollection where Index == Int {
 }
 
 extension CNContact {
-    
+
     func initials() -> String {
         var firstInitial = ""
         var lastInitial = ""

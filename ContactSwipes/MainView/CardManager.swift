@@ -32,12 +32,12 @@ class CardManager {
     }
     
     var top: ContactCardView? {
-        return cards.last
+        return cards.first
     }
 
     func update() {
         // Delete Top Card
-        _ = cards.popLast()
+        _ = cards.removeFirst()
         
         // Get New Top Card
         guard let top = top else {

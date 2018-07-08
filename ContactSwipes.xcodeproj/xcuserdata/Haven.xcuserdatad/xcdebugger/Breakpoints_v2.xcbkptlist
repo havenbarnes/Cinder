@@ -9,12 +9,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ContactSwipes/ContactStore.swift"
-            timestampString = "552556941.887267"
+            filePath = "ContactSwipes/Data/ContactStore.swift"
+            timestampString = "552706540.247436"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58">
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "delete(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -19,9 +19,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="eUz-zD-8lF">
-                                <rect key="frame" x="137.5" y="40" width="100" height="50"/>
+                                <rect key="frame" x="137.5" y="40" width="100" height="70"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="hFA-XU-2dB"/>
+                                    <constraint firstAttribute="height" constant="70" id="hFA-XU-2dB"/>
                                 </constraints>
                             </imageView>
                         </subviews>

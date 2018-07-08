@@ -9,8 +9,9 @@
 import UIKit
 import Contacts
 
-class ViewController: UIViewController, ContactStoreDelegate, CardManagerDelegate {
+class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDelegate {
     
+    private var shouldLoadStack = true
     private let animationTime = 0.4
     private var cardManager: CardManager!
     private var contactStore: ContactStore!
@@ -18,13 +19,16 @@ class ViewController: UIViewController, ContactStoreDelegate, CardManagerDelegat
     @IBOutlet weak var cardStackContainerView: UIView!
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var keepButton: UIButton!
-    
+    @IBOutlet weak var trashButton: UIButton!
     @IBOutlet weak var redoButton: UIButton!
     @IBOutlet weak var progressIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        contactStore = ContactStore.shared
+        contactStore.delegate = self
+
         setNeedsStatusBarAppearanceUpdate()
         initUI()
     }
@@ -33,39 +37,47 @@ class ViewController: UIViewController, ContactStoreDelegate, CardManagerDelegat
         keepButton.layer.cornerRadius = keepButton.frame.width / 2
         deleteButton.layer.cornerRadius = deleteButton.frame.width / 2
         redoButton.layer.cornerRadius = redoButton.frame.width / 2
+        trashButton.layer.cornerRadius = trashButton.frame.width / 2
         redoButton.isHidden = true
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        contactStore = ContactStore.shared
-        contactStore.delegate = self
         
-        contactStore.loadContacts {
-            guard contactStore.contacts.count > 0 else {
-                let title = "No Contacts to Clean"
-                let message = "Your device has no contacts to clean out!"
-                let alert = UIAlertController(title: title,
-                                              message: message,
-                                              preferredStyle: .alert)
-                present(alert, animated: true)
-                return
-            }
-            
-            setupCards(for: contactStore.contacts)
-            progressIndicator.stopAnimating()
-            redoButton.isHidden = false
+        if contactStore.trashEmpty {
+            trashButton.backgroundColor = UIColor.gray.withAlphaComponent(0.15)
         }
+        
+        guard shouldLoadStack else { return }
+        shouldLoadStack = false
+        
+        contactStore.loadCardStackData()
+        progressIndicator.stopAnimating()
+        
+        guard contactStore.cardStack.count > 0 else {
+            let title = "No Contacts to Clean"
+            let message = "Your device has no contacts to clean out!"
+            let alert = UIAlertController(title: title,
+                                          message: message,
+                                          preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            present(alert, animated: true)
+            return
+        }
+        
+        addCardsToStack(for: contactStore.cardStack)
+        progressIndicator.stopAnimating()
+        redoButton.isHidden = false
     }
     
-    func setupCards(for contacts: [CNContact]) {
+    func addCardsToStack(for contacts: [CNContact]) {
         cardStackContainerView.isUserInteractionEnabled = true
 
         var cards: [ContactCardView] = []
         for i in 0..<contacts.count {
             let contact = contacts[i]
             if let card = generateCard(contact, index: i) {
-                cards.append(card)
+                cards.insert(card, at: 0)
             }
         }
         
@@ -73,12 +85,12 @@ class ViewController: UIViewController, ContactStoreDelegate, CardManagerDelegat
         cardManager.delegate = self
     }
     
-    func generateCard(_ contact: CNContact, index: Int) -> ContactCardView? {
+    func generateCard(_ contact: CNContact, index: Int, initialLoad: Bool = true) -> ContactCardView? {
         if let card = Bundle.main.loadNibNamed("ContactCardView", owner: nil, options: nil)?
             .first as! ContactCardView? {
             card.contact = contact
             card.contactIndex = index
-            cardStackContainerView.addSubview(card)
+            cardStackContainerView.insertSubview(card, at: initialLoad ? contactStore.cardStack.count - 1 : 0)
             card.translatesAutoresizingMaskIntoConstraints = false
             
             let attributes: [NSLayoutAttribute] = [.left, .right, .centerY]
@@ -88,14 +100,17 @@ class ViewController: UIViewController, ContactStoreDelegate, CardManagerDelegat
                     multiplier: 1, constant: 0))
             }
             
-            card.center.y = view.frame.height + card.frame.height
-            UIView.animate(withDuration: self.animationTime, delay: 0.1 * Double(index),
-                options: .curveEaseOut, animations: {
-                self.view.layoutIfNeeded()
-            }, completion: nil)
+            if (initialLoad) {
+                card.center.y = view.frame.height + card.frame.height
+                UIView.animate(withDuration: self.animationTime, delay: 0.1 * Double(index),
+                               options: .curveEaseOut, animations: {
+                                self.view.layoutIfNeeded()
+                }, completion: nil)
+            }
             
             return card
         } else {
+            print("ERROR: Couldn't find ContactCardView nib")
             return nil
         }
     }
@@ -118,13 +133,15 @@ class ViewController: UIViewController, ContactStoreDelegate, CardManagerDelegat
     func enableButtons() {
         keepButton.isEnabled = true
         deleteButton.isEnabled = true
+        trashButton.isEnabled = true
     }
     
     func disableButtons() {
         keepButton.isEnabled = false
         deleteButton.isEnabled = false
+        trashButton.isEnabled = false
     }
-    
+
     func keep(_ card: ContactCardView) {
         disableButtons()
         UIView.animate(withDuration: animationTime, animations: {
@@ -136,12 +153,14 @@ class ViewController: UIViewController, ContactStoreDelegate, CardManagerDelegat
             self.enableButtons()
         }
         
+        contactStore.keep(card.contact)
         cardManager.update()
     }
     
-    func delete(_ card: ContactCardView) {
+    func trash(_ card: ContactCardView) {
         self.disableButtons()
         UIView.animate(withDuration: self.animationTime, animations: {
+            self.trashButton.backgroundColor = UIColor.red
             card.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 5)
             card.center.x = -card.frame.width / 2
             card.alpha = 0
@@ -149,25 +168,9 @@ class ViewController: UIViewController, ContactStoreDelegate, CardManagerDelegat
             card.removeFromSuperview()
             self.enableButtons()
         }
-        self.contactStore.delete(card.contact)
-        self.cardManager.update()
-    }
-    
-    func showDeleteConfirmation(for card: ContactCardView) {
-        let title = "Delete Contact?"
-        let message = "Are you sure you want to delete \(card.contact.givenName)'s contact?"
-        let alert = UIAlertController(title: title,
-                                      message: message,
-                                      preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: {
-            action in
-            self.showDeleteConfirmation(for: card)
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {
-            action in
-            self.draggedCardShouldReturn(card: card)
-        }))
-        present(alert, animated: true)
+        
+        contactStore.trash(card.contact)
+        cardManager.update()
     }
     
     // MARK: - CardManagerDelegate
@@ -190,7 +193,7 @@ class ViewController: UIViewController, ContactStoreDelegate, CardManagerDelegat
     }
     
     func dragDidCompletePastBoundary(card: ContactCardView, isRight: Bool) {
-        isRight ? keep(card) : showDeleteConfirmation(for: card)
+        isRight ? keep(card) : trash(card)
     }
     
     func allCardsDragged() {
@@ -203,7 +206,7 @@ class ViewController: UIViewController, ContactStoreDelegate, CardManagerDelegat
         guard let topCard = cardManager.top else {
             return
         }
-        showDeleteConfirmation(for: topCard)
+        trash(topCard)
     }
     
     @IBAction func keepButtonPressed(_ sender: Any) {
@@ -214,6 +217,7 @@ class ViewController: UIViewController, ContactStoreDelegate, CardManagerDelegat
     }
     
     @IBAction func redoButtonPressed(_ sender: Any) {
+        shouldLoadStack = true
         viewDidAppear(false)
     }
 }

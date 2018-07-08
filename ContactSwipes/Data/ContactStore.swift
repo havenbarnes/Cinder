@@ -17,9 +17,12 @@ class ContactStore {
     
     static let shared = ContactStore()
     
-    var contacts: [CNContact] = []
-    
     var delegate: ContactStoreDelegate?
+    
+    var cardStack: [CNContact] = []
+    private var contacts: [String : CNContact] = [:]
+    // TODO: Persist trashed
+    private var trashed: [String : CNContact] = [:]
     
     private var cnContactStore = CNContactStore()
     private var accessStatus: CNAuthorizationStatus? = nil
@@ -29,7 +32,20 @@ class ContactStore {
         delegate?.contactAccessStatusDidUpdate(newAccessStatus)
     }
     
-    func loadContacts(_ completion: () -> ()) {
+    func loadCardStackData() {
+        loadContacts()
+        
+        for _ in 1...5 {
+            if let contact = contacts.values.first {
+                cardStack.append(contact)
+                _ = contacts.popFirst()
+            }
+        }
+        
+        cardStack.shuffle()
+    }
+    
+    private func loadContacts() {
         contacts.removeAll()
         
         let request = CNContactFetchRequest(keysToFetch:
@@ -40,11 +56,34 @@ class ContactStore {
              CNContactPhoneNumbersKey as CNKeyDescriptor,
              CNContactEmailAddressesKey as CNKeyDescriptor])
         try? cnContactStore.enumerateContacts(with: request) { (contact, successful) in
-            self.contacts.append(contact)
+            // Only add those not already trashed
+            guard self.trashed[contact.identifier] == nil else { return }
+            self.contacts[contact.identifier] = contact
         }
-        
-        contacts.shuffle()
-        completion()
+    }
+    
+    func keep(_ contact: CNContact) {
+        contacts.removeValue(forKey: contact.identifier)
+        updateStack()
+    }
+    
+    var trashEmpty: Bool {
+        return trashed.count == 0
+    }
+    
+    func trash(_ contact: CNContact) {
+        trashed[contact.identifier] = contact
+        contacts.removeValue(forKey: contact.identifier)
+        updateStack()
+    }
+    
+    func updateStack() {
+        print("Card Stack Before: \(cardStack.map { $0.identifier })")
+        cardStack.removeFirst()
+        if let newContact = contacts.popFirst()?.value {
+            cardStack.append(newContact)
+        }
+        print("Card Stack After: \(cardStack.map { $0.identifier })")
     }
     
     func delete(_ contact: CNContact) {
