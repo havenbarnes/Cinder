@@ -231,6 +231,9 @@
                                                     <state key="normal" title=" " image="trashcan">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="trashButtonPressed:" destination="TLe-Fo-yW6" eventType="touchUpInside" id="ygb-I7-Hhg"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vfb-2t-IYc" userLabel="Undo Button">
                                                     <rect key="frame" x="324.5" y="5" width="50.5" height="50.5"/>
@@ -239,6 +242,9 @@
                                                     <state key="normal" title=" " image="redo">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="restoreButtonPressed:" destination="TLe-Fo-yW6" eventType="touchUpInside" id="q6b-TI-AKh"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

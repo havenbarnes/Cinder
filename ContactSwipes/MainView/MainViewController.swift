@@ -114,7 +114,7 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
             
             if (initialLoad) {
                 card.center.y = view.frame.height + card.frame.height
-                UIView.animate(withDuration: self.animationTime, delay: 0.1 * Double(index),
+                UIView.animate(withDuration: self.animationTime, delay: 0.1 * Double(index + 1),
                                options: .curveEaseOut, animations: {
                                 self.view.layoutIfNeeded()
                 }, completion: nil)
@@ -143,15 +143,15 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
     }
     
     func dismissTrashButtonIfNeeded() {
-        guard trashButton.center.x == 0 else { return }
+        guard trashButtonLeading.constant == 0 else { return }
         trashButtonLeading.constant = -trashButton.frame.width
-        UIView.animate(withDuration: animationTime / 2, delay: animationTime, options: .curveEaseIn, animations: {
+        UIView.animate(withDuration: animationTime / 2, delay: animationTime / 2, options: .curveEaseIn, animations: {
             self.view.layoutSubviews()
         }, completion: nil)
     }
     
     func presentTrashButtonIfNeeded() {
-        guard trashButton.center.x < 0 else { return }
+        guard trashButtonLeading.constant < 0 else { return }
         trashButtonLeading.constant = 0
         UIView.animate(withDuration: animationTime / 2, delay: animationTime, options: .curveEaseOut, animations: {
             self.view.layoutSubviews()

@@ -96,6 +96,7 @@ class ContactStore {
     }
     
     func delete(_ contact: CNContact) {
+        trashed.removeValue(forKey: contact.identifier)
         print("Deleting Contact...")
         let mutableContact = contact.mutableCopy() as! CNMutableContact
         let request = CNSaveRequest()
@@ -111,12 +112,10 @@ class ContactStore {
     }
     
     func updateStack() {
-        print("Card Stack Before: \(cardStack.map { $0.identifier })")
         cardStack.removeFirst()
         if let newContact = contacts.popFirst()?.value {
             cardStack.append(newContact)
         }
-        print("Card Stack After: \(cardStack.map { $0.identifier })")
     }
     
    
