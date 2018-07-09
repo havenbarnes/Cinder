@@ -31,9 +31,6 @@ class ContactStore {
     // TODO: Persist trashed
     private var trashed: [String : CNContact] = [:]
     private var contacts: [String : CNContact] = [:]
-    
-    
-    
     private var cnContactStore = CNContactStore()
     private var accessStatus: CNAuthorizationStatus? = nil
     
@@ -65,22 +62,29 @@ class ContactStore {
              CNContactThumbnailImageDataKey as CNKeyDescriptor,
              CNContactPhoneNumbersKey as CNKeyDescriptor,
              CNContactEmailAddressesKey as CNKeyDescriptor])
-        try? cnContactStore.enumerateContacts(with: request) { (contact, successful) in
-            // Only add those not already trashed
-            guard self.trashed[contact.identifier] == nil else { return }
-            self.contacts[contact.identifier] = contact
+        do {
+            try cnContactStore.enumerateContacts(with: request) { (contact, successful) in
+                // Only add those not already trashed
+                guard self.trashed[contact.identifier] == nil else { return }
+                self.contacts[contact.identifier] = contact
+            }
+        } catch {
+            checkForContactAccess()
         }
     }
     
-    func keep(_ contact: CNContact) {
+    func keep(_ contact: CNContact, completion: (CNContact?) -> ()) {
         contacts.removeValue(forKey: contact.identifier)
-        updateStack()
+        let newContact = updateStack()
+        completion(newContact)
+        
     }
     
-    func trash(_ contact: CNContact) {
+    func trash(_ contact: CNContact, completion: (CNContact?) -> ()) {
         trashed[contact.identifier] = contact
         contacts.removeValue(forKey: contact.identifier)
-        updateStack()
+        let newContact = updateStack()
+        completion(newContact)
     }
     
     var trashEmpty: Bool {
@@ -111,12 +115,12 @@ class ContactStore {
         trashed.removeAll()
     }
     
-    func updateStack() {
+    func updateStack() -> CNContact? {
         cardStack.removeFirst()
         if let newContact = contacts.popFirst()?.value {
             cardStack.append(newContact)
+            return newContact
         }
+        return nil
     }
-    
-   
 }

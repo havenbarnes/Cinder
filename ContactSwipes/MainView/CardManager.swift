@@ -34,6 +34,10 @@ class CardManager {
     var top: ContactCardView? {
         return cards.first
     }
+    
+    func addCard(_ card: ContactCardView) {
+        cards.append(card)
+    }
 
     func update() {
         // Delete Top Card
@@ -53,29 +57,31 @@ class CardManager {
         if sender.state == .began {
             delegate?.dragStarted()
         }
-        view.bringSubview(toFront: sender.view!)
+        
+        let cardView = sender.view! as! ContactCardView
+        view.bringSubview(toFront: cardView)
         
         // Transition X
         let translation = sender.translation(in: self.view)
-        sender.view!.center.x = sender.view!.center.x + translation.x
+        cardView.center.x = cardView.center.x + translation.x
         
         // Rotate relative to translation
-        let distanceSwiped = UIScreen.main.bounds.width / 2.0 - sender.view!.center.x
+        let distanceSwiped = UIScreen.main.bounds.width / 2.0 - cardView.center.x
         let percentSwipedX = (distanceSwiped / UIScreen.main.bounds.width) * 0.5
         let rotationAngle = -(CGFloat.pi / 2) * percentSwipedX
-        sender.view!.transform = CGAffineTransform(rotationAngle: rotationAngle + 0.05)
+        cardView.transform = CGAffineTransform(rotationAngle: rotationAngle + 0.05)
         
         // Opacity transition
-        sender.view!.alpha = 1 - abs(percentSwipedX)
+        cardView.alpha = 1 - abs(percentSwipedX)
         
         // Reset translation for easier calculation
         sender.setTranslation(CGPoint.zero, in: self.view)
         
         // Check For Drag Completion
         guard sender.state == .ended else { return }
-        if sender.view!.frame.minX <= -100 {
+        if cardView.frame.minX <= -60 {
             delegate?.dragDidCompletePastBoundary(card: top!, isRight: false)
-        } else if sender.view!.frame.maxX >= view.frame.width + 100 {
+        } else if cardView.frame.maxX >= view.frame.width + 60 {
             delegate?.dragDidCompletePastBoundary(card: top!, isRight: true)
         } else {
             delegate?.draggedCardShouldReturn(card: top!)

@@ -23,6 +23,7 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
     @IBOutlet weak var trashButton: UIButton!
     @IBOutlet weak var trashButtonLeading: NSLayoutConstraint!
     @IBOutlet weak var redoButton: UIButton!
+    @IBOutlet weak var allDoneLabel: UILabel!
     @IBOutlet weak var progressIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
@@ -48,7 +49,8 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
         maskLayer.path = path.cgPath
         trashButton.layer.mask = maskLayer
         trashButtonLeading.constant = -trashButton.frame.width // Start off screen
-        redoButton.isHidden = true
+        redoButton.alpha = 0
+        allDoneLabel.alpha = 0
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -68,7 +70,7 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
         
         guard contactStore.cardStack.count > 0 else {
             let title = "No Contacts to Clean"
-            let message = "Your device has no contacts to clean out!"
+            let message = "Your device has no more contacts to clean out!"
             let alert = UIAlertController(title: title,
                                           message: message,
                                           preferredStyle: .alert)
@@ -77,12 +79,17 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
             return
         }
         
-        addCardsToStack(for: contactStore.cardStack)
+        loadCardStack(for: contactStore.cardStack)
         progressIndicator.stopAnimating()
-        redoButton.isHidden = false
     }
     
-    func addCardsToStack(for contacts: [CNContact]) {
+    func addCardToStack(contactData: ContactData) {
+        if let newCard = self.generateCard(contactData.0, index: contactData.1, initialLoad: false) {
+            self.cardManager.addCard(newCard)
+        }
+    }
+    
+    func loadCardStack(for contacts: [CNContact]) {
         cardStackContainerView.isUserInteractionEnabled = true
 
         var cards: [ContactCardView] = []
@@ -133,7 +140,6 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
             let message = "You can go to Settings to give Contact Swipes access to your contacts"
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             let settingsAction = UIAlertAction(title: "Settings", style: .default, handler: { (action) in
-                
                 let settingsUrl = URL(string: UIApplicationOpenSettingsURLString)!
                 UIApplication.shared.open(settingsUrl, options: [:], completionHandler: nil)
             })
@@ -167,10 +173,13 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
         }) { (complete) in
             card.removeFromSuperview()
             self.animating = false
+            
+            self.contactStore.keep(card.contact) { newContact in
+                guard let newContact = newContact else { return }
+                self.addCardToStack(contactData: (newContact, card.contactIndex + 1))
+            }
+            self.cardManager.update()
         }
-        
-        contactStore.keep(card.contact)
-        cardManager.update()
     }
     
     func trash(_ card: ContactCardView) {
@@ -185,11 +194,15 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
         }) { (complete) in
             card.removeFromSuperview()
             self.animating = false
+            self.contactStore.trash(card.contact) { newContact in
+                guard let newContact = newContact else { return }
+                self.addCardToStack(contactData: (newContact, card.contactIndex + 1))
+            }
+           self.cardManager.update()
         }
-        
-        contactStore.trash(card.contact)
-        cardManager.update()
     }
+    
+    
     
     // MARK: - CardManagerDelegate
     
@@ -216,6 +229,10 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
     
     func allCardsDragged() {
         cardStackContainerView.isUserInteractionEnabled = false
+        UIView.animate(withDuration: animationTime) {
+            self.redoButton.alpha = 1
+            self.allDoneLabel.alpha = 1
+        }
     }
     
     // MARK: - Button Actions

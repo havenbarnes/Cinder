@@ -16,11 +16,13 @@ class TrashViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var tableView: UITableView!
     
     private var contacts: [CNContact] = []
+    private var contactColorsArray: [CNContact] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         contacts = ContactStore.shared.getTrash()
+        contactColorsArray = ContactStore.shared.getTrash()
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -37,23 +39,35 @@ class TrashViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let contact = contacts[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContactCell", for: indexPath) as! ContactCell
-        cell.contactData = (contact, indexPath.row)
+        cell.contactData = (contact, contactColorsArray.index(of: contact)!)
         cell.delegate = self
         return cell
     }
     
-    func didRestore(contact: ContactData) {
-        contacts.remove(at: contact.1)
-        let indexPath = IndexPath(row: contact.1, section: 0)
-        tableView.deleteRows(at: [indexPath], with: .top)
-        ContactStore.shared.removeFromTrash(contact.0)
+    func didRestore(contact: CNContact) {
+        let index = contacts.index(of: contact)!
+        contacts.remove(at: index)
+        let indexPath = IndexPath(row: index, section: 0)
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+        ContactStore.shared.removeFromTrash(contact)
+        dismissIfNeeded()
     }
     
-    func didDelete(contact: ContactData) {
-        contacts.remove(at: contact.1)
-        let indexPath = IndexPath(row: contact.1, section: 0)
-        tableView.deleteRows(at: [indexPath], with: .top)
-        ContactStore.shared.delete(contact.0)
+    func didDelete(contact: CNContact) {
+        let index = contacts.index(of: contact)!
+        contacts.remove(at: index)
+        let indexPath = IndexPath(row: index, section: 0)
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+        ContactStore.shared.delete(contact)
+        dismissIfNeeded()
+    }
+    
+    func dismissIfNeeded() {
+        if (contacts.count == 0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
     }
     
     @IBAction func deleteAllButtonPressed(_ sender: Any) {
@@ -65,20 +79,20 @@ class TrashViewController: UIViewController, UITableViewDelegate, UITableViewDat
         alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: {
             action in
             ContactStore.shared.emptyTrash()
-            self.navigationController?.dismiss(animated: true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alert, animated: true)
     }
     
     @IBAction func cancelButtonPressed(_ sender: Any) {
-        navigationController?.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 }
 
 protocol ContactCellDelegate {
-    func didRestore(contact: ContactData)
-    func didDelete(contact: ContactData)
+    func didRestore(contact: CNContact)
+    func didDelete(contact: CNContact)
 }
 
 class ContactCell: UITableViewCell {
@@ -118,6 +132,8 @@ class ContactCell: UITableViewCell {
         if contact.imageDataAvailable {
             let image = UIImage(data: contact.thumbnailImageData!)
             contactImageView.image = image
+        } else {
+            contactImageView.image = nil
         }
         
         if contact.phoneNumbers.count == 0 {
@@ -136,13 +152,11 @@ class ContactCell: UITableViewCell {
     }
     
     @IBAction func restoreButtonPressed(_ sender: Any) {
-        delegate?.didRestore(contact: contactData)
+        delegate?.didRestore(contact: contact)
     }
     
     
     @IBAction func trashButtonPressed(_ sender: Any) {
-        delegate?.didDelete(contact: contactData)
+        delegate?.didDelete(contact: contact)
     }
-    
-    
 }
