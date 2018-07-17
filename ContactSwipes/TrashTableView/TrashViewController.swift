@@ -71,13 +71,14 @@ class TrashViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     @IBAction func deleteAllButtonPressed(_ sender: Any) {
-        let title = "Delete Contact?"
+        let title = "Empty Trash?"
         let message = "Are you sure you want to delete all contacts in trash? This cannot be undone."
         let alert = UIAlertController(title: title,
                                       message: message,
                                       preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: {
             action in
+            SoundManager.shared.play(sound: .longTrash)
             ContactStore.shared.emptyTrash()
             self.dismiss(animated: true, completion: nil)
         }))
@@ -152,11 +153,13 @@ class ContactCell: UITableViewCell {
     }
     
     @IBAction func restoreButtonPressed(_ sender: Any) {
+        SoundManager.shared.play(sound: .erase)
         delegate?.didRestore(contact: contact)
     }
     
     
     @IBAction func trashButtonPressed(_ sender: Any) {
+        SoundManager.shared.play(sound: .shortTrash)
         delegate?.didDelete(contact: contact)
     }
 }

@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		810F926E200AB32300BEC27C /* CardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810F926D200AB32300BEC27C /* CardManager.swift */; };
+		813E108A20FDD2C900B26E23 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813E108920FDD2C900B26E23 /* SoundManager.swift */; };
+		813E109320FDD4E500B26E23 /* trash_heavy.wav in Resources */ = {isa = PBXBuildFile; fileRef = 813E108D20FDD4E400B26E23 /* trash_heavy.wav */; };
+		813E109420FDD4E500B26E23 /* slide_left.wav in Resources */ = {isa = PBXBuildFile; fileRef = 813E108E20FDD4E400B26E23 /* slide_left.wav */; };
+		813E109520FDD4E500B26E23 /* cards_riffle.wav in Resources */ = {isa = PBXBuildFile; fileRef = 813E108F20FDD4E400B26E23 /* cards_riffle.wav */; };
+		813E109620FDD4E500B26E23 /* slide_right.wav in Resources */ = {isa = PBXBuildFile; fileRef = 813E109020FDD4E400B26E23 /* slide_right.wav */; };
+		813E109720FDD4E500B26E23 /* trash_crumple_short.wav in Resources */ = {isa = PBXBuildFile; fileRef = 813E109120FDD4E500B26E23 /* trash_crumple_short.wav */; };
+		813E109820FDD4E500B26E23 /* draw_erase.wav in Resources */ = {isa = PBXBuildFile; fileRef = 813E109220FDD4E500B26E23 /* draw_erase.wav */; };
 		814DF25820F1872000B32FBF /* TrashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814DF25720F1872000B32FBF /* TrashViewController.swift */; };
 		8173BB092002E7E700F09D7A /* ContactStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8173BB082002E7E700F09D7A /* ContactStore.swift */; };
 		81CE02F01FF97F1800CFE7A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CE02EF1FF97F1800CFE7A8 /* AppDelegate.swift */; };
@@ -22,6 +29,13 @@
 
 /* Begin PBXFileReference section */
 		810F926D200AB32300BEC27C /* CardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardManager.swift; sourceTree = "<group>"; };
+		813E108920FDD2C900B26E23 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
+		813E108D20FDD4E400B26E23 /* trash_heavy.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = trash_heavy.wav; sourceTree = "<group>"; };
+		813E108E20FDD4E400B26E23 /* slide_left.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = slide_left.wav; sourceTree = "<group>"; };
+		813E108F20FDD4E400B26E23 /* cards_riffle.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = cards_riffle.wav; sourceTree = "<group>"; };
+		813E109020FDD4E400B26E23 /* slide_right.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = slide_right.wav; sourceTree = "<group>"; };
+		813E109120FDD4E500B26E23 /* trash_crumple_short.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = trash_crumple_short.wav; sourceTree = "<group>"; };
+		813E109220FDD4E500B26E23 /* draw_erase.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = draw_erase.wav; sourceTree = "<group>"; };
 		814DF25720F1872000B32FBF /* TrashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashViewController.swift; sourceTree = "<group>"; };
 		8173BB082002E7E700F09D7A /* ContactStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactStore.swift; sourceTree = "<group>"; };
 		81CE02EC1FF97F1800CFE7A8 /* ContactSwipes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContactSwipes.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -47,22 +61,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		813E108C20FDD4CD00B26E23 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				813E108F20FDD4E400B26E23 /* cards_riffle.wav */,
+				813E109220FDD4E500B26E23 /* draw_erase.wav */,
+				813E108E20FDD4E400B26E23 /* slide_left.wav */,
+				813E109020FDD4E400B26E23 /* slide_right.wav */,
+				813E109120FDD4E500B26E23 /* trash_crumple_short.wav */,
+				813E108D20FDD4E400B26E23 /* trash_heavy.wav */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 		814DF25420F185ED00B32FBF /* MainView */ = {
 			isa = PBXGroup;
 			children = (
 				81CE02F11FF97F1800CFE7A8 /* MainViewController.swift */,
-				810F926D200AB32300BEC27C /* CardManager.swift */,
 				81CE03031FF9807100CFE7A8 /* ContactCardView */,
 			);
 			path = MainView;
-			sourceTree = "<group>";
-		};
-		814DF25520F1863B00B32FBF /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				8173BB082002E7E700F09D7A /* ContactStore.swift */,
-			);
-			path = Data;
 			sourceTree = "<group>";
 		};
 		814DF25620F186F700B32FBF /* TrashTableView */ = {
@@ -93,13 +111,16 @@
 			isa = PBXGroup;
 			children = (
 				81CE02EF1FF97F1800CFE7A8 /* AppDelegate.swift */,
-				814DF25520F1863B00B32FBF /* Data */,
+				8173BB082002E7E700F09D7A /* ContactStore.swift */,
+				810F926D200AB32300BEC27C /* CardManager.swift */,
+				813E108920FDD2C900B26E23 /* SoundManager.swift */,
 				814DF25420F185ED00B32FBF /* MainView */,
 				814DF25620F186F700B32FBF /* TrashTableView */,
 				81CE02F31FF97F1800CFE7A8 /* Main.storyboard */,
 				81CE03081FFACCCC00CFE7A8 /* Extensions.swift */,
 				81CE02F61FF97F1800CFE7A8 /* Assets.xcassets */,
 				81CE02F81FF97F1800CFE7A8 /* LaunchScreen.storyboard */,
+				813E108C20FDD4CD00B26E23 /* Sounds */,
 				81CE02FB1FF97F1800CFE7A8 /* Info.plist */,
 			);
 			path = ContactSwipes;
@@ -173,10 +194,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				813E109520FDD4E500B26E23 /* cards_riffle.wav in Resources */,
+				813E109720FDD4E500B26E23 /* trash_crumple_short.wav in Resources */,
+				813E109620FDD4E500B26E23 /* slide_right.wav in Resources */,
 				81CE02FA1FF97F1800CFE7A8 /* LaunchScreen.storyboard in Resources */,
+				813E109320FDD4E500B26E23 /* trash_heavy.wav in Resources */,
 				81CE02F71FF97F1800CFE7A8 /* Assets.xcassets in Resources */,
 				81CE03021FF9805B00CFE7A8 /* ContactCardView.xib in Resources */,
 				81CE02F51FF97F1800CFE7A8 /* Main.storyboard in Resources */,
+				813E109420FDD4E500B26E23 /* slide_left.wav in Resources */,
+				813E109820FDD4E500B26E23 /* draw_erase.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,6 +215,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81CE03091FFACCCC00CFE7A8 /* Extensions.swift in Sources */,
+				813E108A20FDD2C900B26E23 /* SoundManager.swift in Sources */,
 				814DF25820F1872000B32FBF /* TrashViewController.swift in Sources */,
 				81CE03051FF9808800CFE7A8 /* ContactCardView.swift in Sources */,
 				81CE02F21FF97F1800CFE7A8 /* MainViewController.swift in Sources */,

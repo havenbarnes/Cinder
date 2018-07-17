@@ -25,6 +25,7 @@ class ContactStore {
                   UIColor("36D7B7"),
                   UIColor("96281B")]
     
+    
     var delegate: ContactStoreDelegate?
     
     var cardStack: [CNContact] = []
@@ -34,6 +35,20 @@ class ContactStore {
     private var cnContactStore = CNContactStore()
     private var accessStatus: CNAuthorizationStatus? = nil
     
+    private static let approvedContactsKey = "approvedContactsKey"
+    private var approved: [String : CNContact] {
+        get {
+            guard let approved = UserDefaults.standard.dictionary(forKey: ContactStore.approvedContactsKey)
+                as? [String : CNContact] else {
+                    return [:]
+            }
+            return approved
+        }
+        set (newValue){
+            UserDefaults.standard.set(newValue, forKey: ContactStore.approvedContactsKey)
+        }
+    }
+    
     func checkForContactAccess() {
         let newAccessStatus = CNContactStore.authorizationStatus(for: .contacts)
         delegate?.contactAccessStatusDidUpdate(newAccessStatus)
@@ -41,20 +56,20 @@ class ContactStore {
     
     func loadCardStackData() {
         loadContacts()
+        var contactsArray = Array(contacts.values)
+        contactsArray.shuffle()
         
         for _ in 1...5 {
-            if let contact = contacts.values.first {
+            if let contact = contactsArray.first {
                 cardStack.append(contact)
                 _ = contacts.popFirst()
             }
         }
-        
-        cardStack.shuffle()
     }
     
     private func loadContacts() {
         contacts.removeAll()
-        
+
         let request = CNContactFetchRequest(keysToFetch:
             [CNContactGivenNameKey as CNKeyDescriptor,
              CNContactFamilyNameKey as CNKeyDescriptor,
@@ -74,6 +89,7 @@ class ContactStore {
     }
     
     func keep(_ contact: CNContact, completion: (CNContact?) -> ()) {
+        approved[contact.identifier] = contact
         contacts.removeValue(forKey: contact.identifier)
         let newContact = updateStack()
         completion(newContact)
@@ -122,5 +138,10 @@ class ContactStore {
             return newContact
         }
         return nil
+    }
+    
+    func reset() {
+        approved.removeAll()
+        
     }
 }

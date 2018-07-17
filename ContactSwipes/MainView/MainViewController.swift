@@ -65,6 +65,7 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
         guard shouldLoadStack else { return }
         shouldLoadStack = false
         
+        SoundManager.shared.play(sound: .shuffle)
         contactStore.loadCardStackData()
         progressIndicator.stopAnimating()
         
@@ -165,6 +166,7 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
     }
 
     func keep(_ card: ContactCardView) {
+        SoundManager.shared.play(sound: .slideRight)
         animating = true
         UIView.animate(withDuration: animationTime, animations: {
             card.transform = CGAffineTransform(rotationAngle: CGFloat.pi / 5)
@@ -183,10 +185,10 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
     }
     
     func trash(_ card: ContactCardView) {
-        
+        SoundManager.shared.play(sound: .slideLeft)
         presentTrashButtonIfNeeded()
-        
         animating = true
+        
         UIView.animate(withDuration: self.animationTime, animations: {
             card.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 5)
             card.center.x = -card.frame.width / 2

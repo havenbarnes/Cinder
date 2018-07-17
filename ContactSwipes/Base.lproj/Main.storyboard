@@ -37,7 +37,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All Done!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="sOa-5e-uHq">
-                                <rect key="frame" x="137.5" y="379.5" width="99" height="26"/>
+                                <rect key="frame" x="138" y="379.5" width="99" height="26"/>
                                 <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="20"/>
                                 <color key="textColor" red="0.65098039215686276" green="0.65098039215686276" blue="0.65098039215686276" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -82,7 +82,7 @@
                                 </subviews>
                             </stackView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="aNc-V5-7YZ">
-                                <rect key="frame" x="137" y="40" width="100" height="60"/>
+                                <rect key="frame" x="137.5" y="40" width="100" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="6OV-Fc-adH"/>
                                 </constraints>
@@ -177,14 +177,7 @@
                                                             <inset key="titleEdgeInsets" minX="-70" minY="0.0" maxX="18" maxY="0.0"/>
                                                             <inset key="imageEdgeInsets" minX="85" minY="9" maxX="13" maxY="9"/>
                                                             <state key="normal" image="trashcan">
-                                                                <attributedString key="attributedTitle">
-                                                                    <fragment content="Delete">
-                                                                        <attributes>
-                                                                            <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                            <font key="NSFont" size="18" name=".AppleSystemUIFont"/>
-                                                                        </attributes>
-                                                                    </fragment>
-                                                                </attributedString>
+                                                                <attributedString key="attributedTitle"/>
                                                             </state>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -195,10 +188,20 @@
                                                                 <action selector="trashButtonPressed:" destination="TLe-Fo-yW6" eventType="touchUpInside" id="S9b-Y8-LVy"/>
                                                             </connections>
                                                         </button>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="    Delete" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YGc-db-QuJ">
+                                                            <rect key="frame" x="245" y="57.5" width="114" height="34"/>
+                                                            <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
+                                                        <constraint firstItem="YGc-db-QuJ" firstAttribute="centerY" secondItem="1vB-U1-Ucq" secondAttribute="centerY" id="DZ1-yd-08w"/>
+                                                        <constraint firstItem="YGc-db-QuJ" firstAttribute="height" secondItem="1vB-U1-Ucq" secondAttribute="height" id="Dqp-Zm-UNC"/>
+                                                        <constraint firstItem="YGc-db-QuJ" firstAttribute="centerX" secondItem="1vB-U1-Ucq" secondAttribute="centerX" id="Fp8-BK-4Ci"/>
                                                         <constraint firstAttribute="bottom" secondItem="1vB-U1-Ucq" secondAttribute="bottom" constant="10" id="GDx-q0-yf9"/>
+                                                        <constraint firstItem="YGc-db-QuJ" firstAttribute="width" secondItem="1vB-U1-Ucq" secondAttribute="width" id="M36-Em-SkT"/>
                                                         <constraint firstAttribute="trailing" secondItem="1vB-U1-Ucq" secondAttribute="trailing" constant="16" id="sKo-sb-3A8"/>
                                                     </constraints>
                                                 </view>
@@ -255,25 +258,16 @@
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vfb-2t-IYc" userLabel="Undo Button">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vfb-2t-IYc" userLabel="Undo Button">
                                                     <rect key="frame" x="244.5" y="21" width="114" height="34"/>
                                                     <color key="backgroundColor" red="0.65098039220000004" green="0.65098039220000004" blue="0.65098039220000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="34" id="Pr2-vA-KPn"/>
                                                         <constraint firstAttribute="width" constant="114" id="VA1-aS-5oE"/>
                                                     </constraints>
-                                                    <inset key="titleEdgeInsets" minX="-70" minY="0.0" maxX="18" maxY="0.0"/>
-                                                    <inset key="imageEdgeInsets" minX="85" minY="9" maxX="11" maxY="9"/>
-                                                    <state key="normal" image="redo">
-                                                        <attributedString key="attributedTitle">
-                                                            <fragment content="Restore">
-                                                                <attributes>
-                                                                    <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                    <font key="NSFont" size="18" name=".AppleSystemUIFont"/>
-                                                                </attributes>
-                                                            </fragment>
-                                                        </attributedString>
-                                                    </state>
+                                                    <inset key="titleEdgeInsets" minX="-35" minY="0.0" maxX="48" maxY="0.0"/>
+                                                    <inset key="imageEdgeInsets" minX="85" minY="9" maxX="13" maxY="9"/>
+                                                    <state key="normal" title="" image="redo"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <integer key="value" value="17"/>
@@ -283,6 +277,12 @@
                                                         <action selector="restoreButtonPressed:" destination="TLe-Fo-yW6" eventType="touchUpInside" id="q6b-TI-AKh"/>
                                                     </connections>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   Restore" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8DZ-XA-y1h">
+                                                    <rect key="frame" x="244" y="21" width="114" height="34"/>
+                                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
@@ -297,13 +297,17 @@
                                                 <constraint firstItem="TsZ-ui-O48" firstAttribute="leading" secondItem="xI9-7q-hV1" secondAttribute="leading" constant="25" id="KI0-F4-uob"/>
                                                 <constraint firstItem="SS8-AF-sHg" firstAttribute="centerY" secondItem="xI9-7q-hV1" secondAttribute="centerY" id="RKW-fs-mLq"/>
                                                 <constraint firstItem="vfb-2t-IYc" firstAttribute="leading" secondItem="SS8-AF-sHg" secondAttribute="trailing" constant="-130" id="TBm-Ek-bwP"/>
+                                                <constraint firstItem="8DZ-XA-y1h" firstAttribute="centerX" secondItem="vfb-2t-IYc" secondAttribute="centerX" id="U5f-tj-5LE"/>
+                                                <constraint firstItem="8DZ-XA-y1h" firstAttribute="height" secondItem="vfb-2t-IYc" secondAttribute="height" id="Xkc-eg-aBB"/>
                                                 <constraint firstItem="vfb-2t-IYc" firstAttribute="leading" secondItem="UC0-g5-AGk" secondAttribute="trailing" constant="8" id="YP1-Xk-YEf"/>
                                                 <constraint firstItem="UC0-g5-AGk" firstAttribute="top" secondItem="jmk-Ej-sSI" secondAttribute="bottom" id="aBN-xO-SkP"/>
+                                                <constraint firstItem="8DZ-XA-y1h" firstAttribute="centerY" secondItem="vfb-2t-IYc" secondAttribute="centerY" id="cNq-2z-siy"/>
                                                 <constraint firstItem="SS8-AF-sHg" firstAttribute="centerX" secondItem="xI9-7q-hV1" secondAttribute="centerX" id="dfB-tP-Hj0"/>
                                                 <constraint firstAttribute="bottom" secondItem="UC0-g5-AGk" secondAttribute="bottom" constant="18" id="h7l-g9-pbf"/>
                                                 <constraint firstItem="vfb-2t-IYc" firstAttribute="leading" secondItem="jmk-Ej-sSI" secondAttribute="trailing" constant="8" id="i6h-lt-gXK"/>
                                                 <constraint firstItem="jmk-Ej-sSI" firstAttribute="top" secondItem="MdO-rz-hPY" secondAttribute="bottom" id="qhS-pL-xBE"/>
                                                 <constraint firstItem="MdO-rz-hPY" firstAttribute="leading" secondItem="TsZ-ui-O48" secondAttribute="trailing" constant="8" id="uKR-xK-5rn"/>
+                                                <constraint firstItem="8DZ-XA-y1h" firstAttribute="width" secondItem="vfb-2t-IYc" secondAttribute="width" id="uYd-D0-GNr"/>
                                                 <constraint firstItem="vfb-2t-IYc" firstAttribute="leading" secondItem="MdO-rz-hPY" secondAttribute="trailing" constant="8" id="vC2-9M-cgF"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -353,7 +357,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qz2-bX-6fT">
-                                <rect key="frame" x="130" y="621" width="114" height="34"/>
+                                <rect key="frame" x="130.5" y="621" width="114" height="34"/>
                                 <color key="backgroundColor" red="0.28268564819897263" green="0.56243934585978816" blue="0.98823529409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="114" id="0Yz-YC-0oL"/>
