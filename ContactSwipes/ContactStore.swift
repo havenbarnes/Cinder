@@ -30,17 +30,30 @@ class ContactStore {
     
     var cardStack: [CNContact] = []
     // TODO: Persist trashed
-    private var trashed: [String : CNContact] = [:]
     private var contacts: [String : CNContact] = [:]
     private var cnContactStore = CNContactStore()
     private var accessStatus: CNAuthorizationStatus? = nil
     
-    private static let approvedContactsKey = "approvedContactsKey"
-    private var approved: [String : CNContact] {
+    private static let trashedContactsKey = "trashedContactsKey"
+    private var trashed: [String] {
         get {
-            guard let approved = UserDefaults.standard.dictionary(forKey: ContactStore.approvedContactsKey)
-                as? [String : CNContact] else {
-                    return [:]
+            guard let trashed = UserDefaults.standard.stringArray(forKey: ContactStore.trashedContactsKey)
+                else {
+                    return []
+            }
+            return trashed
+        }
+        set (newValue){
+            UserDefaults.standard.set(newValue, forKey: ContactStore.trashedContactsKey)
+        }
+    }
+    
+    private static let approvedContactsKey = "approvedContactsKey"
+    private var approved: [String] {
+        get {
+            guard let approved = UserDefaults.standard.stringArray(forKey: ContactStore.approvedContactsKey)
+                else {
+                    return []
             }
             return approved
         }
@@ -61,9 +74,26 @@ class ContactStore {
         
         for _ in 1...5 {
             if let contact = contactsArray.first {
+                contactsArray.removeFirst()
+                contacts.removeValue(forKey: contact.identifier)
                 cardStack.append(contact)
-                _ = contacts.popFirst()
             }
+        }
+    }
+    
+    private func fetchContact(_ identifier: String, completion: @escaping (CNContact?) -> ()) {
+        let keysToFetch: [CNKeyDescriptor] =
+            [CNContactGivenNameKey as CNKeyDescriptor,
+             CNContactFamilyNameKey as CNKeyDescriptor,
+             CNContactImageDataAvailableKey as CNKeyDescriptor,
+             CNContactThumbnailImageDataKey as CNKeyDescriptor,
+             CNContactPhoneNumbersKey as CNKeyDescriptor,
+             CNContactEmailAddressesKey as CNKeyDescriptor]
+        do {
+            let contact = try cnContactStore.unifiedContact(withIdentifier: identifier, keysToFetch: keysToFetch)
+            completion(contact)
+        } catch {
+            completion(nil)
         }
     }
     
@@ -80,7 +110,8 @@ class ContactStore {
         do {
             try cnContactStore.enumerateContacts(with: request) { (contact, successful) in
                 // Only add those not already trashed
-                guard self.trashed[contact.identifier] == nil else { return }
+                guard !self.approved.contains(contact.identifier) else { return }
+                guard !self.trashed.contains(contact.identifier) else { return }
                 self.contacts[contact.identifier] = contact
             }
         } catch {
@@ -89,7 +120,7 @@ class ContactStore {
     }
     
     func keep(_ contact: CNContact, completion: (CNContact?) -> ()) {
-        approved[contact.identifier] = contact
+        approved.append(contact.identifier)
         contacts.removeValue(forKey: contact.identifier)
         let newContact = updateStack()
         completion(newContact)
@@ -97,7 +128,7 @@ class ContactStore {
     }
     
     func trash(_ contact: CNContact, completion: (CNContact?) -> ()) {
-        trashed[contact.identifier] = contact
+        trashed.append(contact.identifier)
         contacts.removeValue(forKey: contact.identifier)
         let newContact = updateStack()
         completion(newContact)
@@ -108,16 +139,23 @@ class ContactStore {
     }
     
     func getTrash() -> [CNContact] {
-        return Array(trashed.values)
+        var trash: [CNContact] = []
+        trashed.forEach({ identifier in
+            fetchContact(identifier, completion: { contact in
+                if let contact = contact {
+                    trash.append(contact)
+                }
+            })
+        })
+        return trash
     }
     
     func removeFromTrash(_ contact: CNContact) {
-        trashed.removeValue(forKey: contact.identifier)
+        trashed.remove(at: trashed.index(of: contact.identifier)!)
     }
     
     func delete(_ contact: CNContact) {
-        trashed.removeValue(forKey: contact.identifier)
-        print("Deleting Contact...")
+        trashed.remove(at: trashed.index(of: contact.identifier)!)
         let mutableContact = contact.mutableCopy() as! CNMutableContact
         let request = CNSaveRequest()
         request.delete(mutableContact)
@@ -125,8 +163,12 @@ class ContactStore {
     }
     
     func emptyTrash() {
-        for contact in trashed.values {
-            delete(contact)
+        for identifier in trashed {
+            fetchContact(identifier, completion: { contact in
+                if let contact = contact {
+                    self.delete(contact)
+                }
+            })
         }
         trashed.removeAll()
     }
@@ -142,6 +184,5 @@ class ContactStore {
     
     func reset() {
         approved.removeAll()
-        
     }
 }

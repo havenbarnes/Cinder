@@ -11,7 +11,7 @@ import Contacts
 
 class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDelegate {
     
-    private let animationTime = 0.4
+    private let animationTime = 0.3
     private var animating = false
     private var shouldLoadStack = true
     private var cardManager: CardManager!
@@ -65,7 +65,6 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
         guard shouldLoadStack else { return }
         shouldLoadStack = false
         
-        SoundManager.shared.play(sound: .shuffle)
         contactStore.loadCardStackData()
         progressIndicator.stopAnimating()
         
@@ -77,8 +76,11 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
                                           preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             present(alert, animated: true)
+            allCardsDragged()
             return
         }
+        
+        SoundManager.shared.play(sound: .shuffle)
         
         loadCardStack(for: contactStore.cardStack)
         progressIndicator.stopAnimating()
@@ -262,6 +264,7 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
     @IBAction func redoButtonPressed(_ sender: Any) {
         guard !animating else { return }
         shouldLoadStack = true
+        contactStore.reset()
         viewDidAppear(false)
     }
 }

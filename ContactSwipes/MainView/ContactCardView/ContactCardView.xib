@@ -1,26 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="Futura.ttc">
-            <string>Futura-Bold</string>
-            <string>Futura-Medium</string>
-        </array>
-    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ContactCardView" customModule="ContactSwipes" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="355" height="291"/>
+            <rect key="frame" x="0.0" y="0.0" width="355" height="280"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a0e-i1-0nG">
@@ -28,7 +22,7 @@
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="N" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="fo6-Fl-lBh">
                             <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
-                            <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="43"/>
+                            <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="40"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -56,26 +50,26 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PHONE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" translatesAutoresizingMaskIntoConstraints="NO" id="nVd-ch-Zbt">
-                    <rect key="frame" x="20" y="130" width="315" height="22.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="PHONE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" translatesAutoresizingMaskIntoConstraints="NO" id="nVd-ch-Zbt">
+                    <rect key="frame" x="20" y="126" width="315" height="22.5"/>
                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+1 (123) 456-7890" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="none" minimumScaleFactor="0.65000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="nXk-eJ-340">
-                    <rect key="frame" x="20" y="160" width="315" height="39"/>
+                    <rect key="frame" x="20" y="148.5" width="315" height="47"/>
                     <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="30"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EMAIL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" translatesAutoresizingMaskIntoConstraints="NO" id="bI3-5k-W2n">
-                    <rect key="frame" x="20" y="215" width="315" height="22.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="EMAIL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" translatesAutoresizingMaskIntoConstraints="NO" id="bI3-5k-W2n">
+                    <rect key="frame" x="20" y="200.5" width="315" height="22.5"/>
                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="longemail@email.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="none" minimumScaleFactor="0.65000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="HRK-YO-6m5">
-                    <rect key="frame" x="20" y="242.5" width="315" height="39"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="1000" text="longemail@email.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="none" minimumScaleFactor="0.65000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="HRK-YO-6m5">
+                    <rect key="frame" x="20" y="231" width="315" height="39"/>
                     <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="30"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
@@ -87,18 +81,18 @@
                 <constraint firstItem="nVd-ch-Zbt" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="2X3-GV-Iuq"/>
                 <constraint firstItem="nXk-eJ-340" firstAttribute="leading" secondItem="nVd-ch-Zbt" secondAttribute="leading" id="3TW-5P-4YV"/>
                 <constraint firstItem="a0e-i1-0nG" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="9Td-eN-9rz"/>
-                <constraint firstItem="nXk-eJ-340" firstAttribute="top" secondItem="nVd-ch-Zbt" secondAttribute="bottom" constant="7.5" id="AA0-8Z-RoH"/>
+                <constraint firstItem="nXk-eJ-340" firstAttribute="top" secondItem="nVd-ch-Zbt" secondAttribute="bottom" id="AA0-8Z-RoH"/>
                 <constraint firstItem="bI3-5k-W2n" firstAttribute="leading" secondItem="nXk-eJ-340" secondAttribute="leading" id="DZb-RW-1xn"/>
                 <constraint firstItem="eZO-C6-ZA9" firstAttribute="leading" secondItem="a0e-i1-0nG" secondAttribute="trailing" constant="10" id="GHw-Et-fr6"/>
                 <constraint firstItem="a0e-i1-0nG" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="IpY-WN-mX4"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="nVd-ch-Zbt" secondAttribute="trailing" constant="20" id="Nsc-uR-tzK"/>
                 <constraint firstItem="eZO-C6-ZA9" firstAttribute="centerY" secondItem="a0e-i1-0nG" secondAttribute="centerY" id="O0l-Fx-ylI"/>
-                <constraint firstItem="HRK-YO-6m5" firstAttribute="top" secondItem="bI3-5k-W2n" secondAttribute="bottom" constant="5" id="UxB-lx-aMs"/>
+                <constraint firstItem="HRK-YO-6m5" firstAttribute="top" secondItem="bI3-5k-W2n" secondAttribute="bottom" constant="8" id="UxB-lx-aMs"/>
                 <constraint firstItem="HRK-YO-6m5" firstAttribute="leading" secondItem="bI3-5k-W2n" secondAttribute="leading" id="WNi-AF-9JO"/>
                 <constraint firstItem="bI3-5k-W2n" firstAttribute="trailing" secondItem="nXk-eJ-340" secondAttribute="trailing" id="Z1H-9L-tKx"/>
-                <constraint firstItem="nVd-ch-Zbt" firstAttribute="top" secondItem="a0e-i1-0nG" secondAttribute="bottom" constant="20" id="cXx-QE-qup"/>
+                <constraint firstItem="nVd-ch-Zbt" firstAttribute="top" secondItem="a0e-i1-0nG" secondAttribute="bottom" constant="16" id="cXx-QE-qup"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="eZO-C6-ZA9" secondAttribute="trailing" constant="16" id="fjK-2N-Ceo"/>
-                <constraint firstItem="bI3-5k-W2n" firstAttribute="top" secondItem="nXk-eJ-340" secondAttribute="bottom" constant="16" id="hbi-Ow-eTV"/>
+                <constraint firstItem="bI3-5k-W2n" firstAttribute="top" secondItem="nXk-eJ-340" secondAttribute="bottom" constant="5" id="hbi-Ow-eTV"/>
                 <constraint firstItem="nXk-eJ-340" firstAttribute="trailing" secondItem="nVd-ch-Zbt" secondAttribute="trailing" id="xwM-EB-uvW"/>
                 <constraint firstItem="HRK-YO-6m5" firstAttribute="trailing" secondItem="bI3-5k-W2n" secondAttribute="trailing" id="y1q-WU-IoV"/>
             </constraints>

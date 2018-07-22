@@ -14,7 +14,6 @@
 		813E109520FDD4E500B26E23 /* cards_riffle.wav in Resources */ = {isa = PBXBuildFile; fileRef = 813E108F20FDD4E400B26E23 /* cards_riffle.wav */; };
 		813E109620FDD4E500B26E23 /* slide_right.wav in Resources */ = {isa = PBXBuildFile; fileRef = 813E109020FDD4E400B26E23 /* slide_right.wav */; };
 		813E109720FDD4E500B26E23 /* trash_crumple_short.wav in Resources */ = {isa = PBXBuildFile; fileRef = 813E109120FDD4E500B26E23 /* trash_crumple_short.wav */; };
-		813E109820FDD4E500B26E23 /* draw_erase.wav in Resources */ = {isa = PBXBuildFile; fileRef = 813E109220FDD4E500B26E23 /* draw_erase.wav */; };
 		814DF25820F1872000B32FBF /* TrashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814DF25720F1872000B32FBF /* TrashViewController.swift */; };
 		8173BB092002E7E700F09D7A /* ContactStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8173BB082002E7E700F09D7A /* ContactStore.swift */; };
 		81CE02F01FF97F1800CFE7A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CE02EF1FF97F1800CFE7A8 /* AppDelegate.swift */; };
@@ -35,7 +34,6 @@
 		813E108F20FDD4E400B26E23 /* cards_riffle.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = cards_riffle.wav; sourceTree = "<group>"; };
 		813E109020FDD4E400B26E23 /* slide_right.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = slide_right.wav; sourceTree = "<group>"; };
 		813E109120FDD4E500B26E23 /* trash_crumple_short.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = trash_crumple_short.wav; sourceTree = "<group>"; };
-		813E109220FDD4E500B26E23 /* draw_erase.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = draw_erase.wav; sourceTree = "<group>"; };
 		814DF25720F1872000B32FBF /* TrashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashViewController.swift; sourceTree = "<group>"; };
 		8173BB082002E7E700F09D7A /* ContactStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactStore.swift; sourceTree = "<group>"; };
 		81CE02EC1FF97F1800CFE7A8 /* ContactSwipes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContactSwipes.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,7 +63,6 @@
 			isa = PBXGroup;
 			children = (
 				813E108F20FDD4E400B26E23 /* cards_riffle.wav */,
-				813E109220FDD4E500B26E23 /* draw_erase.wav */,
 				813E108E20FDD4E400B26E23 /* slide_left.wav */,
 				813E109020FDD4E400B26E23 /* slide_right.wav */,
 				813E109120FDD4E500B26E23 /* trash_crumple_short.wav */,
@@ -203,7 +200,6 @@
 				81CE03021FF9805B00CFE7A8 /* ContactCardView.xib in Resources */,
 				81CE02F51FF97F1800CFE7A8 /* Main.storyboard in Resources */,
 				813E109420FDD4E500B26E23 /* slide_left.wav in Resources */,
-				813E109820FDD4E500B26E23 /* draw_erase.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

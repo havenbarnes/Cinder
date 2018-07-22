@@ -153,7 +153,7 @@ class ContactCell: UITableViewCell {
     }
     
     @IBAction func restoreButtonPressed(_ sender: Any) {
-        SoundManager.shared.play(sound: .erase)
+        SoundManager.shared.play(sound: .slideLeft)
         delegate?.didRestore(contact: contact)
     }
     

@@ -12,7 +12,6 @@ enum Sound: String {
     case shuffle = "cards_riffle"
     case slideLeft = "slide_left"
     case slideRight = "slide_right"
-    case erase = "draw_erase"
     case longTrash = "trash_crumple_short"
     case shortTrash = "trash_heavy"
 }
