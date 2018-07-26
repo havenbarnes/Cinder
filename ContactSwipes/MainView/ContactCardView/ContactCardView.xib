@@ -44,8 +44,8 @@
                         <constraint firstItem="5xD-w5-trx" firstAttribute="top" secondItem="a0e-i1-0nG" secondAttribute="top" id="yRT-C1-VJR"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.34999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="eZO-C6-ZA9">
-                    <rect key="frame" x="120" y="43.5" width="219" height="44.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Spencer Miller" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.34999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="eZO-C6-ZA9">
+                    <rect key="frame" x="120" y="21.5" width="219" height="88.5"/>
                     <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="34"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
@@ -56,14 +56,14 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+1 (123) 456-7890" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="none" minimumScaleFactor="0.65000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="nXk-eJ-340">
-                    <rect key="frame" x="20" y="148.5" width="315" height="47"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+1 (123) 456-78903123213" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="none" minimumScaleFactor="0.65000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="nXk-eJ-340">
+                    <rect key="frame" x="20" y="148.5" width="315" height="60"/>
                     <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="30"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="EMAIL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" translatesAutoresizingMaskIntoConstraints="NO" id="bI3-5k-W2n">
-                    <rect key="frame" x="20" y="200.5" width="315" height="22.5"/>
+                    <rect key="frame" x="20" y="208.5" width="315" height="22.5"/>
                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
@@ -87,12 +87,12 @@
                 <constraint firstItem="a0e-i1-0nG" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="IpY-WN-mX4"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="nVd-ch-Zbt" secondAttribute="trailing" constant="20" id="Nsc-uR-tzK"/>
                 <constraint firstItem="eZO-C6-ZA9" firstAttribute="centerY" secondItem="a0e-i1-0nG" secondAttribute="centerY" id="O0l-Fx-ylI"/>
-                <constraint firstItem="HRK-YO-6m5" firstAttribute="top" secondItem="bI3-5k-W2n" secondAttribute="bottom" constant="8" id="UxB-lx-aMs"/>
+                <constraint firstItem="HRK-YO-6m5" firstAttribute="top" secondItem="bI3-5k-W2n" secondAttribute="bottom" id="UxB-lx-aMs"/>
                 <constraint firstItem="HRK-YO-6m5" firstAttribute="leading" secondItem="bI3-5k-W2n" secondAttribute="leading" id="WNi-AF-9JO"/>
                 <constraint firstItem="bI3-5k-W2n" firstAttribute="trailing" secondItem="nXk-eJ-340" secondAttribute="trailing" id="Z1H-9L-tKx"/>
                 <constraint firstItem="nVd-ch-Zbt" firstAttribute="top" secondItem="a0e-i1-0nG" secondAttribute="bottom" constant="16" id="cXx-QE-qup"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="eZO-C6-ZA9" secondAttribute="trailing" constant="16" id="fjK-2N-Ceo"/>
-                <constraint firstItem="bI3-5k-W2n" firstAttribute="top" secondItem="nXk-eJ-340" secondAttribute="bottom" constant="5" id="hbi-Ow-eTV"/>
+                <constraint firstItem="bI3-5k-W2n" firstAttribute="top" secondItem="nXk-eJ-340" secondAttribute="bottom" id="hbi-Ow-eTV"/>
                 <constraint firstItem="nXk-eJ-340" firstAttribute="trailing" secondItem="nVd-ch-Zbt" secondAttribute="trailing" id="xwM-EB-uvW"/>
                 <constraint firstItem="HRK-YO-6m5" firstAttribute="trailing" secondItem="bI3-5k-W2n" secondAttribute="trailing" id="y1q-WU-IoV"/>
             </constraints>

@@ -263,8 +263,13 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
     
     @IBAction func redoButtonPressed(_ sender: Any) {
         guard !animating else { return }
+        contactStoreDidReset()
+    }
+    
+    func contactStoreDidReset() {
+        cardStackContainerView.subviews.forEach { $0.removeFromSuperview() }
         shouldLoadStack = true
-        contactStore.reset()
+        contactStore.refillDeck()
         viewDidAppear(false)
     }
 }

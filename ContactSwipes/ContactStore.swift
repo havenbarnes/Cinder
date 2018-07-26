@@ -11,6 +11,7 @@ import Contacts
 
 protocol ContactStoreDelegate {
     func contactAccessStatusDidUpdate(_ accessStatus: CNAuthorizationStatus)
+    func contactStoreDidReset()
 }
 
 class ContactStore {
@@ -29,10 +30,38 @@ class ContactStore {
     var delegate: ContactStoreDelegate?
     
     var cardStack: [CNContact] = []
-    // TODO: Persist trashed
     private var contacts: [String : CNContact] = [:]
     private var cnContactStore = CNContactStore()
     private var accessStatus: CNAuthorizationStatus? = nil
+
+    private static let deletedCountKey = "deletedCountKey"
+    private var deletedCount: Int {
+        get {
+            return UserDefaults.standard.integer(forKey: ContactStore.deletedCountKey)
+        }
+        set (newValue){
+            UserDefaults.standard.set(newValue, forKey: ContactStore.deletedCountKey)
+        }
+    }
+    private static let totalCountKey = "totalCountKey"
+    private var totalCount: Int {
+        get {
+            return UserDefaults.standard.integer(forKey: ContactStore.totalCountKey)
+        }
+        set (newValue){
+            UserDefaults.standard.set(newValue, forKey: ContactStore.totalCountKey)
+        }
+    }
+    
+    private static let seenCountKey = "seenCountKey"
+    private var seenCount: Int {
+        get {
+            return UserDefaults.standard.integer(forKey: ContactStore.seenCountKey)
+        }
+        set (newValue){
+            UserDefaults.standard.set(newValue, forKey: ContactStore.seenCountKey)
+        }
+    }
     
     private static let trashedContactsKey = "trashedContactsKey"
     private var trashed: [String] {
@@ -65,6 +94,14 @@ class ContactStore {
     func checkForContactAccess() {
         let newAccessStatus = CNContactStore.authorizationStatus(for: .contacts)
         delegate?.contactAccessStatusDidUpdate(newAccessStatus)
+    }
+    
+    func getStats() -> [String: Int] {
+        return [
+            "seenCount": seenCount,
+            "totalCount": totalCount,
+            "deletedCount": deletedCount
+        ]
     }
     
     func loadCardStackData() {
@@ -117,9 +154,11 @@ class ContactStore {
         } catch {
             checkForContactAccess()
         }
+        totalCount = contacts.count + approved.count + trashed.count
     }
     
     func keep(_ contact: CNContact, completion: (CNContact?) -> ()) {
+        seenCount = seenCount + 1
         approved.append(contact.identifier)
         contacts.removeValue(forKey: contact.identifier)
         let newContact = updateStack()
@@ -128,6 +167,7 @@ class ContactStore {
     }
     
     func trash(_ contact: CNContact, completion: (CNContact?) -> ()) {
+        seenCount = seenCount + 1
         trashed.append(contact.identifier)
         contacts.removeValue(forKey: contact.identifier)
         let newContact = updateStack()
@@ -160,6 +200,7 @@ class ContactStore {
         let request = CNSaveRequest()
         request.delete(mutableContact)
         try? cnContactStore.execute(request)
+        deletedCount = deletedCount + 1
     }
     
     func emptyTrash() {
@@ -171,6 +212,7 @@ class ContactStore {
             })
         }
         trashed.removeAll()
+        seenCount = approved.count
     }
     
     func updateStack() -> CNContact? {
@@ -182,7 +224,19 @@ class ContactStore {
         return nil
     }
     
-    func reset() {
+    func refillDeck() {
         approved.removeAll()
+        seenCount = trashed.count
+    }
+    
+    func reset() {
+        seenCount = 0
+        totalCount = 0
+        deletedCount = 0
+        approved = []
+        trashed = []
+        cardStack = []
+        contacts = [:]
+        delegate?.contactStoreDidReset()
     }
 }
