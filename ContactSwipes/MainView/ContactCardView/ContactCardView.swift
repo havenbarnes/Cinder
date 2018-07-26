@@ -42,6 +42,10 @@ class ContactCardView: UIView {
         initialsLabel.text = contact.initials()
         
         nameLabel.text = contact.givenName + " " + contact.familyName
+        if nameLabel.text!.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+            && !contact.organizationName.isEmpty {
+            nameLabel.text = contact.organizationName
+        }
         
         if contact.imageDataAvailable {
             let image = UIImage(data: contact.thumbnailImageData!)

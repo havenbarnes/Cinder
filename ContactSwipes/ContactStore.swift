@@ -125,7 +125,10 @@ class ContactStore {
              CNContactImageDataAvailableKey as CNKeyDescriptor,
              CNContactThumbnailImageDataKey as CNKeyDescriptor,
              CNContactPhoneNumbersKey as CNKeyDescriptor,
-             CNContactEmailAddressesKey as CNKeyDescriptor]
+             CNContactEmailAddressesKey as CNKeyDescriptor,
+             CNContactJobTitleKey as CNKeyDescriptor,
+             CNContactOrganizationNameKey as CNKeyDescriptor,
+             CNContactDepartmentNameKey as CNKeyDescriptor]
         do {
             let contact = try cnContactStore.unifiedContact(withIdentifier: identifier, keysToFetch: keysToFetch)
             completion(contact)
@@ -143,7 +146,10 @@ class ContactStore {
              CNContactImageDataAvailableKey as CNKeyDescriptor,
              CNContactThumbnailImageDataKey as CNKeyDescriptor,
              CNContactPhoneNumbersKey as CNKeyDescriptor,
-             CNContactEmailAddressesKey as CNKeyDescriptor])
+             CNContactEmailAddressesKey as CNKeyDescriptor,
+             CNContactJobTitleKey as CNKeyDescriptor,
+             CNContactOrganizationNameKey as CNKeyDescriptor,
+             CNContactDepartmentNameKey as CNKeyDescriptor])
         do {
             try cnContactStore.enumerateContacts(with: request) { (contact, successful) in
                 // Only add those not already trashed

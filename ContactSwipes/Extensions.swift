@@ -46,6 +46,11 @@ extension CNContact {
             lastInitial = "\(familyName[..<lastIndex])"
         }
         
+        if givenName == "" && familyName == "" && organizationName != "" {
+            let firstIndex = organizationName.index(organizationName.startIndex, offsetBy: 1)
+            firstInitial = "\(organizationName[..<firstIndex])"
+        }
+        
         return firstInitial + lastInitial
     }
 

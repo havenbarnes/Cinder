@@ -89,13 +89,13 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vxT-gH-bw5" userLabel="Trash Button">
-                                <rect key="frame" x="0.0" y="386" width="60" height="60"/>
+                                <rect key="frame" x="-14" y="386" width="74" height="60"/>
                                 <color key="backgroundColor" red="0.93065731686075437" green="0.26960561245887921" blue="0.004258708075516887" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="vxT-gH-bw5" secondAttribute="height" multiplier="1:1" id="ARx-6d-z53"/>
+                                    <constraint firstAttribute="width" constant="74" id="ErP-8R-7Ql"/>
                                     <constraint firstAttribute="height" constant="60" id="uPR-f3-hSr"/>
                                 </constraints>
-                                <inset key="imageEdgeInsets" minX="18" minY="15" maxX="15" maxY="16"/>
+                                <inset key="imageEdgeInsets" minX="33" minY="15" maxX="15" maxY="16"/>
                                 <state key="normal" title=" " image="trashcan">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -122,7 +122,7 @@
                             <constraint firstItem="sOa-5e-uHq" firstAttribute="top" secondItem="SOJ-5g-X68" secondAttribute="bottom" constant="10" id="ANZ-Pc-mGl"/>
                             <constraint firstItem="Wc6-Nv-ETG" firstAttribute="centerX" secondItem="pNf-HC-Y8N" secondAttribute="centerX" id="Iqw-ut-OUS"/>
                             <constraint firstItem="aNc-V5-7YZ" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="KW2-9G-uUU"/>
-                            <constraint firstItem="vxT-gH-bw5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="LC6-JZ-ecA"/>
+                            <constraint firstItem="vxT-gH-bw5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="-14" id="LC6-JZ-ecA"/>
                             <constraint firstItem="pNf-HC-Y8N" firstAttribute="top" secondItem="aNc-V5-7YZ" secondAttribute="bottom" constant="10" id="MbC-x0-a83"/>
                             <constraint firstItem="vxT-gH-bw5" firstAttribute="centerY" secondItem="b8I-ax-mqI" secondAttribute="centerY" id="VMt-VZ-qXp"/>
                             <constraint firstItem="b8I-ax-mqI" firstAttribute="top" secondItem="pNf-HC-Y8N" secondAttribute="bottom" constant="8" id="cWk-4f-FBN"/>

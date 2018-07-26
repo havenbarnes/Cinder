@@ -45,6 +45,7 @@ class TrashViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func didRestore(contact: CNContact) {
+        guard contacts.contains(contact) else { return }
         let index = contacts.index(of: contact)!
         contacts.remove(at: index)
         let indexPath = IndexPath(row: index, section: 0)
@@ -54,6 +55,7 @@ class TrashViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func didDelete(contact: CNContact) {
+        guard contacts.contains(contact) else { return }
         let index = contacts.index(of: contact)!
         contacts.remove(at: index)
         let indexPath = IndexPath(row: index, section: 0)
@@ -129,6 +131,10 @@ class ContactCell: UITableViewCell {
         initialsLabel.text = contact.initials()
         
         nameLabel.text = contact.givenName + " " + contact.familyName
+        if nameLabel.text!.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+            && !contact.organizationName.isEmpty {
+            nameLabel.text = contact.organizationName
+        }
         
         if contact.imageDataAvailable {
             let image = UIImage(data: contact.thumbnailImageData!)

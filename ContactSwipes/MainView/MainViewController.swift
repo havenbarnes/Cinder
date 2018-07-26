@@ -152,7 +152,7 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
     }
     
     func dismissTrashButtonIfNeeded() {
-        guard trashButtonLeading.constant == 0 else { return }
+        guard trashButtonLeading.constant == -14 else { return }
         trashButtonLeading.constant = -trashButton.frame.width
         UIView.animate(withDuration: animationTime / 2, delay: animationTime / 2, options: .curveEaseIn, animations: {
             self.view.layoutSubviews()
@@ -160,8 +160,8 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
     }
     
     func presentTrashButtonIfNeeded() {
-        guard trashButtonLeading.constant < 0 else { return }
-        trashButtonLeading.constant = 0
+        guard trashButtonLeading.constant < -14 else { return }
+        trashButtonLeading.constant = -14
         UIView.animate(withDuration: animationTime / 2, delay: animationTime, options: .curveEaseOut, animations: {
             self.view.layoutSubviews()
         }, completion: nil)
@@ -188,13 +188,14 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
     
     func trash(_ card: ContactCardView) {
         SoundManager.shared.play(sound: .slideLeft)
-        presentTrashButtonIfNeeded()
         animating = true
         
         UIView.animate(withDuration: self.animationTime, animations: {
             card.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 5)
             card.center.x = -card.frame.width / 2
             card.alpha = 0
+            self.trashButtonLeading.constant = 0
+            self.view.layoutIfNeeded()
         }) { (complete) in
             card.removeFromSuperview()
             self.animating = false
@@ -203,10 +204,13 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
                 self.addCardToStack(contactData: (newContact, card.contactIndex + 1))
             }
            self.cardManager.update()
+            
+            UIView.animate(withDuration: 0.2, animations: {
+                self.trashButtonLeading.constant = -14
+                self.view.layoutIfNeeded()
+            })
         }
     }
-    
-    
     
     // MARK: - CardManagerDelegate
     
