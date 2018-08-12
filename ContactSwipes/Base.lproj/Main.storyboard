@@ -532,11 +532,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="95"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tto-kN-yKN">
+                                                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tto-kN-yKN">
                                                     <rect key="frame" x="0.0" y="5" width="375" height="85"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZkI-i0-KgP" customClass="GADUnifiedNativeAdView">
+                                                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZkI-i0-KgP" customClass="GADUnifiedNativeAdView">
                                                     <rect key="frame" x="30" y="11" width="330" height="73"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iif-uN-FPL" customClass="GADMediaView">
@@ -554,7 +554,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Body" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="40p-ca-wRp">
-                                                            <rect key="frame" x="68" y="59.5" width="262" height="14.5"/>
+                                                            <rect key="frame" x="68" y="58.5" width="262" height="14.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -584,14 +584,14 @@
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstItem="40p-ca-wRp" firstAttribute="top" secondItem="TTg-qs-JJU" secondAttribute="bottom" constant="12" id="1dq-XF-iyj"/>
+                                                        <constraint firstItem="40p-ca-wRp" firstAttribute="top" secondItem="TTg-qs-JJU" secondAttribute="bottom" constant="11" id="1dq-XF-iyj"/>
                                                         <constraint firstItem="peG-TT-8mC" firstAttribute="centerY" secondItem="TTg-qs-JJU" secondAttribute="centerY" id="23A-BJ-AT1"/>
                                                         <constraint firstItem="40p-ca-wRp" firstAttribute="leading" secondItem="Iif-uN-FPL" secondAttribute="trailing" constant="8" id="4oc-Mx-GEY"/>
                                                         <constraint firstAttribute="trailing" secondItem="2Ns-yt-cgq" secondAttribute="trailing" constant="20" id="8zt-GC-wzy"/>
                                                         <constraint firstItem="2Ns-yt-cgq" firstAttribute="top" secondItem="ZkI-i0-KgP" secondAttribute="top" id="Bji-DG-0h3"/>
                                                         <constraint firstItem="peG-TT-8mC" firstAttribute="leading" secondItem="TTg-qs-JJU" secondAttribute="trailing" id="CZ1-5L-tri"/>
                                                         <constraint firstAttribute="trailing" secondItem="2po-AD-ixM" secondAttribute="trailing" constant="4.5" id="Jb3-3p-1ug"/>
-                                                        <constraint firstAttribute="bottom" secondItem="40p-ca-wRp" secondAttribute="bottom" constant="-1" id="Jj5-f9-kXz"/>
+                                                        <constraint firstAttribute="bottom" secondItem="40p-ca-wRp" secondAttribute="bottom" id="Jj5-f9-kXz"/>
                                                         <constraint firstItem="Iif-uN-FPL" firstAttribute="top" secondItem="ZkI-i0-KgP" secondAttribute="top" id="Snn-jK-dkx"/>
                                                         <constraint firstAttribute="trailing" secondItem="40p-ca-wRp" secondAttribute="trailing" id="d7b-v0-Lgr"/>
                                                         <constraint firstItem="2Ns-yt-cgq" firstAttribute="leading" secondItem="Iif-uN-FPL" secondAttribute="trailing" constant="8" id="erI-YO-UM7"/>

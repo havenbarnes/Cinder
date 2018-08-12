@@ -22,11 +22,23 @@ class TrashViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        contacts = ContactStore.shared.getTrash()
-        contactColorsArray = ContactStore.shared.getTrash()
-        
-        tableView.delegate = self
-        tableView.dataSource = self
+        loadTable {
+            self.tableView.delegate = self
+            self.tableView.dataSource = self
+            UIView.transition(with: self.tableView, duration: 0.3, options: .transitionCrossDissolve, animations: {
+                self.tableView.reloadData()
+            }, completion: nil)
+        }
+    }
+    
+    func loadTable(completion: @escaping ()->()) {
+        DispatchQueue.global(qos: .background).async {
+            self.contacts = ContactStore.shared.getTrash()
+            self.contactColorsArray = ContactStore.shared.getTrash()
+            DispatchQueue.main.async {
+                completion()
+            }
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -49,12 +61,11 @@ class TrashViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func shouldShowAd(for indexPath: IndexPath) -> Bool {
-        return (AdManager.shared.ads.count >= indexPath.row / 4) && (indexPath.row % 4 == 0) &&
-            (indexPath.row > 0)
+        return ((indexPath.row + 1) % 5 == 0) && (indexPath.row > 0)
     }
     
     func generateAdRow(for indexPath: IndexPath) -> UITableViewCell {
-        let nativeAd = AdManager.shared.ads[indexPath.row % 4]
+        let nativeAd = AdManager.shared.ads[(indexPath.row / 5) % 5]
         nativeAd.rootViewController = self
         
         let nativeAdCell = tableView.dequeueReusableCell(
@@ -66,7 +77,6 @@ class TrashViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // This is required to make the ad clickable.
         adView.nativeAd = nativeAd
         
-        // Populate the ad view with the ad assets.
         (adView.headlineView as! UILabel).text = nativeAd.headline
         (adView.priceView as! UILabel).text = nativeAd.price
         if let starRating = nativeAd.starRating {
@@ -77,12 +87,8 @@ class TrashViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         (adView.bodyView as! UILabel).text = nativeAd.body
         (adView.advertiserView as! UILabel).text = nativeAd.advertiser
-        // The SDK automatically turns off user interaction for assets that are part of the ad, but
-        // it is still good to be explicit.
         (adView.callToActionView as! UIButton).isUserInteractionEnabled = false
-        (adView.callToActionView as! UIButton).setTitle(
-            nativeAd.callToAction, for: UIControlState.normal)
-        
+        (adView.callToActionView as! UIButton).setTitle(nativeAd.callToAction, for: UIControlState.normal)
         return nativeAdCell
     }
     

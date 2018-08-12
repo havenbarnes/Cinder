@@ -13,9 +13,9 @@ class AdManager: NSObject, GADUnifiedNativeAdLoaderDelegate {
     static let shared = AdManager()
     
     // Test
-    let adUnitID = "ca-app-pub-3940256099942544/8407707713"
+    //let adUnitID = "ca-app-pub-3940256099942544/8407707713"
     // Prod
-    //let adUnitID = "ca-app-pub-6103293012504966/3824734522"
+    let adUnitID = "ca-app-pub-6103293012504966/3824734522"
     
     private let numAdsToLoad = 5
     private var adLoader: GADAdLoader!
