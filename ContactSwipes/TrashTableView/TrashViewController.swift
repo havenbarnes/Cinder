@@ -8,6 +8,7 @@
 
 import UIKit
 import Contacts
+import GoogleMobileAds
 
 typealias ContactData = (CNContact, Int)
 
@@ -37,11 +38,52 @@ class TrashViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if shouldShowAd(for: indexPath) {
+            return generateAdRow(for: indexPath)
+        }
         let contact = contacts[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContactCell", for: indexPath) as! ContactCell
         cell.contactData = (contact, contactColorsArray.index(of: contact)!)
         cell.delegate = self
         return cell
+    }
+    
+    func shouldShowAd(for indexPath: IndexPath) -> Bool {
+        return (AdManager.shared.ads.count >= indexPath.row / 4) && (indexPath.row % 4 == 0) &&
+            (indexPath.row > 0)
+    }
+    
+    func generateAdRow(for indexPath: IndexPath) -> UITableViewCell {
+        let nativeAd = AdManager.shared.ads[indexPath.row % 4]
+        nativeAd.rootViewController = self
+        
+        let nativeAdCell = tableView.dequeueReusableCell(
+            withIdentifier: "AdCell", for: indexPath)
+        
+        let adView : GADUnifiedNativeAdView = nativeAdCell.contentView.subviews[1] as! GADUnifiedNativeAdView
+        
+        // Associate the ad view with the ad object.
+        // This is required to make the ad clickable.
+        adView.nativeAd = nativeAd
+        
+        // Populate the ad view with the ad assets.
+        (adView.headlineView as! UILabel).text = nativeAd.headline
+        (adView.priceView as! UILabel).text = nativeAd.price
+        if let starRating = nativeAd.starRating {
+            (adView.starRatingView as! UILabel).text =
+                starRating.description + "\u{2605}"
+        } else {
+            (adView.starRatingView as! UILabel).text = nil
+        }
+        (adView.bodyView as! UILabel).text = nativeAd.body
+        (adView.advertiserView as! UILabel).text = nativeAd.advertiser
+        // The SDK automatically turns off user interaction for assets that are part of the ad, but
+        // it is still good to be explicit.
+        (adView.callToActionView as! UIButton).isUserInteractionEnabled = false
+        (adView.callToActionView as! UIButton).setTitle(
+            nativeAd.callToAction, for: UIControlState.normal)
+        
+        return nativeAdCell
     }
     
     func didRestore(contact: CNContact) {
@@ -90,82 +132,5 @@ class TrashViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBAction func cancelButtonPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
-    }
-}
-
-protocol ContactCellDelegate {
-    func didRestore(contact: CNContact)
-    func didDelete(contact: CNContact)
-}
-
-class ContactCell: UITableViewCell {
-    
-    var delegate: ContactCellDelegate?
-    
-    @IBOutlet weak var initialsLabelBackground: UIView!
-    @IBOutlet weak var contactImageView: UIImageView!
-    @IBOutlet weak var initialsLabel: UILabel!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var phoneLabel: UILabel!
-    @IBOutlet weak var emailLabel: UILabel!
-    
-    private var contact: CNContact!
-    private var contactIndex: Int!
-    var contactData: ContactData! {
-        didSet {
-            contact = contactData.0
-            contactIndex = contactData.1
-            updateUI()
-        }
-    }
-    
-    private func updateUI() {
-        initialsLabelBackground.layer.cornerRadius = contactImageView.frame.width / 2
-        contactImageView.layer.cornerRadius = contactImageView.frame.width / 2
-        contactImageView.clipsToBounds = true
-        setupContact()
-    }
-    
-    private func setupContact() {
-        initialsLabelBackground.backgroundColor = ContactStore.colors[contactIndex % ContactStore.colors.count]
-        initialsLabel.text = contact.initials()
-        
-        nameLabel.text = contact.givenName + " " + contact.familyName
-        if nameLabel.text!.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-            && !contact.organizationName.isEmpty {
-            nameLabel.text = contact.organizationName
-        }
-        
-        if contact.imageDataAvailable {
-            let image = UIImage(data: contact.thumbnailImageData!)
-            contactImageView.image = image
-        } else {
-            contactImageView.image = nil
-        }
-        
-        if contact.phoneNumbers.count == 0 {
-            phoneLabel.text = "No Phone"
-            phoneLabel.alpha = 0.4
-        } else {
-            phoneLabel.text = contact.phoneNumbers.first!.value.stringValue
-        }
-        
-        if contact.emailAddresses.count == 0 {
-            emailLabel.text = "No Email"
-            emailLabel.alpha = 0.4
-        } else {
-            emailLabel.text = contact.emailAddresses.first!.value as String
-        }
-    }
-    
-    @IBAction func restoreButtonPressed(_ sender: Any) {
-        SoundManager.shared.play(sound: .slideLeft)
-        delegate?.didRestore(contact: contact)
-    }
-    
-    
-    @IBAction func trashButtonPressed(_ sender: Any) {
-        SoundManager.shared.play(sound: .shortTrash)
-        delegate?.didDelete(contact: contact)
     }
 }
