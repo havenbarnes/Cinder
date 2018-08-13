@@ -30,7 +30,7 @@ class AdManager: NSObject, GADUnifiedNativeAdLoaderDelegate {
                                options: [options])
         adLoader.delegate = self
         let request = GADRequest()
-        request.testDevices = [kGADSimulatorID]
+        request.testDevices = ["df6f08837354521ec6e9482771742dfc"]
         adLoader.load(request)
     }
     

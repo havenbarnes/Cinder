@@ -525,7 +525,7 @@
                                             <outlet property="phoneLabel" destination="jmk-Ej-sSI" id="gSm-7p-Be0"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AdCell" rowHeight="95" id="SeN-bf-jc0">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NativeAdCell" rowHeight="95" id="SeN-bf-jc0">
                                         <rect key="frame" x="0.0" y="169" width="375" height="95"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SeN-bf-jc0" id="0Bt-cS-tCA">
@@ -639,6 +639,35 @@
                                                 <constraint firstItem="ZkI-i0-KgP" firstAttribute="left" secondItem="iHw-fd-6wx" secondAttribute="right" id="xJX-Jv-gXB"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AdCell" rowHeight="60" id="S26-3c-PKI">
+                                        <rect key="frame" x="0.0" y="264" width="375" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="S26-3c-PKI" id="5Cn-vg-6c4">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rAk-cx-Fje">
+                                                    <rect key="frame" x="0.0" y="5" width="375" height="50"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="7W7-2U-oAr"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="autoloadEnabled" value="NO"/>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="adUnitID" value="ca-app-pub-6103293012504966/3824734522"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="rAk-cx-Fje" firstAttribute="top" secondItem="5Cn-vg-6c4" secondAttribute="top" constant="5" id="9pm-Pl-ffI"/>
+                                                <constraint firstItem="rAk-cx-Fje" firstAttribute="centerX" secondItem="5Cn-vg-6c4" secondAttribute="centerX" id="IzO-cE-CyO"/>
+                                                <constraint firstAttribute="bottom" secondItem="rAk-cx-Fje" secondAttribute="bottom" constant="5" id="N95-7F-HEu"/>
+                                                <constraint firstItem="rAk-cx-Fje" firstAttribute="width" secondItem="5Cn-vg-6c4" secondAttribute="width" id="wtR-ZC-NHM"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

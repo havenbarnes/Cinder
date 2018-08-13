@@ -51,7 +51,23 @@ class TrashViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if shouldShowAd(for: indexPath) {
-            return generateAdRow(for: indexPath)
+            let adCell = tableView.dequeueReusableCell(withIdentifier: "AdCell")!
+            let bannerContainer = adCell.contentView.subviews.first!
+            if let currentBanner = bannerContainer.subviews.first {
+                currentBanner.removeFromSuperview()
+            }
+            let bannerId = "ca-app-pub-6103293012504966/3824734522" // Prod
+            //let bannerId = "ca-app-pub-3940256099942544/2934735716" // Test
+            let bannerView = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
+            bannerView.adUnitID = bannerId
+            bannerView.rootViewController = self
+            bannerView.load(GADRequest())
+            bannerContainer.addSubview(bannerView)
+            bannerView.alpha = 0
+            UIView.animate(withDuration: 1, animations: {
+                bannerView.alpha = 1
+            })
+            return adCell
         }
         let contact = contacts[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContactCell", for: indexPath) as! ContactCell
@@ -64,7 +80,7 @@ class TrashViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return ((indexPath.row + 1) % 5 == 0) && (indexPath.row > 0)
     }
     
-    func generateAdRow(for indexPath: IndexPath) -> UITableViewCell {
+    func generateNativeAdRow(for indexPath: IndexPath) -> UITableViewCell {
         let nativeAd = AdManager.shared.ads[(indexPath.row / 5) % 5]
         nativeAd.rootViewController = self
         

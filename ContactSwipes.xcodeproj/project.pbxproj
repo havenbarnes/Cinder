@@ -16,10 +16,9 @@
 		813E109720FDD4E500B26E23 /* trash_crumple_short.wav in Resources */ = {isa = PBXBuildFile; fileRef = 813E109120FDD4E500B26E23 /* trash_crumple_short.wav */; };
 		814DF25820F1872000B32FBF /* TrashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814DF25720F1872000B32FBF /* TrashViewController.swift */; };
 		8173BB092002E7E700F09D7A /* ContactStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8173BB082002E7E700F09D7A /* ContactStore.swift */; };
-		8186BB1F211D63F500C98DCB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8186BB1E211D63F500C98DCB /* GoogleService-Info.plist */; };
 		8186BB21211D680C00C98DCB /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8186BB20211D680C00C98DCB /* ContactCell.swift */; };
-		8186BB23211D682E00C98DCB /* AdCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8186BB22211D682E00C98DCB /* AdCell.swift */; };
 		8186BB25211F98A600C98DCB /* AdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8186BB24211F98A600C98DCB /* AdManager.swift */; };
+		8186BB272120FD4C00C98DCB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8186BB262120FD4B00C98DCB /* GoogleService-Info.plist */; };
 		81B3D8C32106D55C006870D6 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B3D8C22106D55C006870D6 /* StatsViewController.swift */; };
 		81CE02F01FF97F1800CFE7A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CE02EF1FF97F1800CFE7A8 /* AppDelegate.swift */; };
 		81CE02F21FF97F1800CFE7A8 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CE02F11FF97F1800CFE7A8 /* MainViewController.swift */; };
@@ -42,10 +41,9 @@
 		813E109120FDD4E500B26E23 /* trash_crumple_short.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = trash_crumple_short.wav; sourceTree = "<group>"; };
 		814DF25720F1872000B32FBF /* TrashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashViewController.swift; sourceTree = "<group>"; };
 		8173BB082002E7E700F09D7A /* ContactStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactStore.swift; sourceTree = "<group>"; };
-		8186BB1E211D63F500C98DCB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8186BB20211D680C00C98DCB /* ContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
-		8186BB22211D682E00C98DCB /* AdCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdCell.swift; sourceTree = "<group>"; };
 		8186BB24211F98A600C98DCB /* AdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdManager.swift; sourceTree = "<group>"; };
+		8186BB262120FD4B00C98DCB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		81B3D8C22106D55C006870D6 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 		81CE02EC1FF97F1800CFE7A8 /* ContactSwipes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContactSwipes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81CE02EF1FF97F1800CFE7A8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -107,7 +105,6 @@
 			isa = PBXGroup;
 			children = (
 				814DF25720F1872000B32FBF /* TrashViewController.swift */,
-				8186BB22211D682E00C98DCB /* AdCell.swift */,
 				8186BB20211D680C00C98DCB /* ContactCell.swift */,
 			);
 			path = TrashTableView;
@@ -155,8 +152,8 @@
 				81CE02F61FF97F1800CFE7A8 /* Assets.xcassets */,
 				81CE02F81FF97F1800CFE7A8 /* LaunchScreen.storyboard */,
 				813E108C20FDD4CD00B26E23 /* Sounds */,
-				8186BB1E211D63F500C98DCB /* GoogleService-Info.plist */,
 				81CE02FB1FF97F1800CFE7A8 /* Info.plist */,
+				8186BB262120FD4B00C98DCB /* GoogleService-Info.plist */,
 			);
 			path = ContactSwipes;
 			sourceTree = "<group>";
@@ -248,7 +245,7 @@
 				813E109320FDD4E500B26E23 /* trash_heavy.wav in Resources */,
 				81CE02F71FF97F1800CFE7A8 /* Assets.xcassets in Resources */,
 				81CE03021FF9805B00CFE7A8 /* ContactCardView.xib in Resources */,
-				8186BB1F211D63F500C98DCB /* GoogleService-Info.plist in Resources */,
+				8186BB272120FD4C00C98DCB /* GoogleService-Info.plist in Resources */,
 				81CE02F51FF97F1800CFE7A8 /* Main.storyboard in Resources */,
 				813E109420FDD4E500B26E23 /* slide_left.wav in Resources */,
 			);
@@ -318,7 +315,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8186BB21211D680C00C98DCB /* ContactCell.swift in Sources */,
-				8186BB23211D682E00C98DCB /* AdCell.swift in Sources */,
 				81CE03091FFACCCC00CFE7A8 /* Extensions.swift in Sources */,
 				813E108A20FDD2C900B26E23 /* SoundManager.swift in Sources */,
 				814DF25820F1872000B32FBF /* TrashViewController.swift in Sources */,
