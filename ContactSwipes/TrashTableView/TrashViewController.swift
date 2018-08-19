@@ -12,15 +12,20 @@ import GoogleMobileAds
 
 typealias ContactData = (CNContact, Int)
 
-class TrashViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ContactCellDelegate {
+class TrashViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ContactCellDelegate, GADInterstitialDelegate {
 
     @IBOutlet weak var tableView: UITableView!
+    
+    let interstitial = GADInterstitial(adUnitID: "ca-app-pub-6103293012504966/9853415237")
     
     private var contacts: [CNContact] = []
     private var contactColorsArray: [CNContact] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        interstitial.load(GADRequest())
+        interstitial.delegate = self
         
         loadTable {
             self.tableView.delegate = self
@@ -46,7 +51,7 @@ class TrashViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return contacts.count
+        return contacts.count + contacts.count / 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -69,7 +74,7 @@ class TrashViewController: UIViewController, UITableViewDelegate, UITableViewDat
             })
             return adCell
         }
-        let contact = contacts[indexPath.row]
+        let contact = contacts[indexPath.row - indexPath.row / 5]
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContactCell", for: indexPath) as! ContactCell
         cell.contactData = (contact, contactColorsArray.index(of: contact)!)
         cell.delegate = self
@@ -112,8 +117,7 @@ class TrashViewController: UIViewController, UITableViewDelegate, UITableViewDat
         guard contacts.contains(contact) else { return }
         let index = contacts.index(of: contact)!
         contacts.remove(at: index)
-        let indexPath = IndexPath(row: index, section: 0)
-        tableView.deleteRows(at: [indexPath], with: .automatic)
+        tableView.reloadData()
         ContactStore.shared.removeFromTrash(contact)
         dismissIfNeeded()
     }
@@ -122,8 +126,7 @@ class TrashViewController: UIViewController, UITableViewDelegate, UITableViewDat
         guard contacts.contains(contact) else { return }
         let index = contacts.index(of: contact)!
         contacts.remove(at: index)
-        let indexPath = IndexPath(row: index, section: 0)
-        tableView.deleteRows(at: [indexPath], with: .automatic)
+        tableView.reloadData()
         ContactStore.shared.delete(contact)
         dismissIfNeeded()
     }
@@ -136,6 +139,23 @@ class TrashViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
+    // MARK: - Interstitial Delegate
+    /// Tells the delegate the interstitial is to be animated off the screen.
+    func interstitialWillDismissScreen(_ ad: GADInterstitial) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    /// Tells the delegate the interstitial had been animated off the screen.
+    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    /// Tells the delegate that a user click will open another app
+    /// (such as the App Store), backgrounding the current app.
+    func interstitialWillLeaveApplication(_ ad: GADInterstitial) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func deleteAllButtonPressed(_ sender: Any) {
         let title = "Empty Trash?"
         let message = "Are you sure you want to delete all contacts in trash? This cannot be undone."
@@ -146,7 +166,11 @@ class TrashViewController: UIViewController, UITableViewDelegate, UITableViewDat
             action in
             SoundManager.shared.play(sound: .longTrash)
             ContactStore.shared.emptyTrash()
-            self.dismiss(animated: true, completion: nil)
+            if self.interstitial.isReady {
+                self.interstitial.present(fromRootViewController: self)
+            } else {
+                self.dismiss(animated: true, completion: nil)
+            }
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alert, animated: true)
