@@ -8,6 +8,7 @@
 
 import UIKit
 import Contacts
+import Crashlytics
 
 class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDelegate {
     
@@ -37,6 +38,7 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
     }
     
     func initUI() {
+        view.layoutSubviews()
         keepButton.layer.cornerRadius = keepButton.frame.width / 2
         deleteButton.layer.cornerRadius = deleteButton.frame.width / 2
         redoButton.layer.cornerRadius = redoButton.frame.width / 2
@@ -55,7 +57,7 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+
         if contactStore.trashEmpty {
             dismissTrashButtonIfNeeded()
         } else {

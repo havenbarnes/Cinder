@@ -222,7 +222,9 @@ class ContactStore {
     }
     
     func updateStack() -> CNContact? {
-        cardStack.removeFirst()
+        if !cardStack.isEmpty {
+            cardStack.removeFirst()
+        }
         if let newContact = contacts.popFirst()?.value {
             cardStack.append(newContact)
             return newContact
