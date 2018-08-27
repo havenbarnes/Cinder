@@ -76,7 +76,7 @@ class TrashViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         let contact = contacts[indexPath.row - indexPath.row / 5]
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContactCell", for: indexPath) as! ContactCell
-        cell.contactData = (contact, contactColorsArray.index(of: contact)!)
+        cell.contactData = (contact, contactColorsArray.index(of: contact) ?? 0)
         cell.delegate = self
         return cell
     }

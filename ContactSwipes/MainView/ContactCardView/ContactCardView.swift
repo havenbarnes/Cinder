@@ -48,8 +48,10 @@ class ContactCardView: UIView {
         }
         
         if contact.imageDataAvailable {
-            let image = UIImage(data: contact.thumbnailImageData!)
-            contactImageView.image = image
+            if let data = contact.thumbnailImageData {
+                let image = UIImage(data: data)
+                contactImageView.image = image
+            }
         }
         
         if contact.phoneNumbers.count == 0 {
