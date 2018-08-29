@@ -52,7 +52,7 @@ class ContactCell: UITableViewCell {
             nameLabel.text = contact.organizationName
         }
         
-        if contact.imageDataAvailable {
+        if contact.imageDataAvailable && contact.thumbnailImageData != nil {
             let image = UIImage(data: contact.thumbnailImageData!)
             contactImageView.image = image
         } else {

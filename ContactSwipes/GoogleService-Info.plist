@@ -7,35 +7,35 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>662932223327-nse76sfefjfh56lclbshu5dqdtfc6ua6.apps.googleusercontent.com</string>
+	<string>1021400668472-ug7gfpouj7r6cnrcgcrit63390ktg9s4.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.662932223327-nse76sfefjfh56lclbshu5dqdtfc6ua6</string>
+	<string>com.googleusercontent.apps.1021400668472-ug7gfpouj7r6cnrcgcrit63390ktg9s4</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBA-RcL0IoyG8moI-McQYZyhEID_UibIN8</string>
+	<string>AIzaSyC-S12_k8qOkvjVQwRvBP94J1fy4DhlLp0</string>
 	<key>GCM_SENDER_ID</key>
-	<string>662932223327</string>
+	<string>1021400668472</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>io.azing.Cinder</string>
 	<key>PROJECT_ID</key>
-	<string>alarmable-server</string>
+	<string>cinder-ios</string>
 	<key>STORAGE_BUCKET</key>
-	<string>alarmable-server.appspot.com</string>
+	<string>cinder-ios.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_APPINVITE_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_GCM_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:662932223327:ios:2494872519221c65</string>
+	<string>1:1021400668472:ios:2494872519221c65</string>
 	<key>DATABASE_URL</key>
-	<string>https://alarmable-server.firebaseio.com</string>
+	<string>https://cinder-ios.firebaseio.com</string>
 	<key>ADMOB_APP_ID</key>
 	<string>ca-app-pub-6103293012504966~4319558547</string>
 </dict>

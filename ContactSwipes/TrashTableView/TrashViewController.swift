@@ -133,9 +133,7 @@ class TrashViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func dismissIfNeeded() {
         if (contacts.count == 0) {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                self.dismiss(animated: true, completion: nil)
-            }
+            self.dismiss(animated: true, completion: nil)
         }
     }
     
