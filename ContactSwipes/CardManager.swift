@@ -59,7 +59,7 @@ class CardManager {
         }
         
         let cardView = sender.view! as! ContactCardView
-        view.bringSubview(toFront: cardView)
+        view.bringSubviewToFront(cardView)
         
         // Transition X
         let translation = sender.translation(in: self.view)

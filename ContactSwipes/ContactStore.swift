@@ -18,14 +18,15 @@ class ContactStore {
     
     static let shared = ContactStore()
     
-    static let colors = [UIColor("F03434"),
-                  UIColor("663399"),
-                  UIColor("22A7F0"),
-                  UIColor("26C281"),
-                  UIColor("F9690E"),
-                  UIColor("36D7B7"),
-                  UIColor("96281B")]
-    
+    static let colors = [
+        UIColor("F03434"),
+        UIColor("663399"),
+        UIColor("22A7F0"),
+        UIColor("26C281"),
+        UIColor("F9690E"),
+        UIColor("36D7B7"),
+        UIColor("96281B")
+    ]
     
     var delegate: ContactStoreDelegate?
     
@@ -106,8 +107,7 @@ class ContactStore {
     
     func loadCardStackData() {
         loadContacts()
-        var contactsArray = Array(contacts.values)
-        contactsArray.shuffle()
+        var contactsArray = Array(contacts.values).shuffled()
         
         for _ in 1...5 {
             if let contact = contactsArray.first {
@@ -186,13 +186,28 @@ class ContactStore {
     
     func getTrash() -> [CNContact] {
         var trash: [CNContact] = []
-        trashed.forEach({ identifier in
-            fetchContact(identifier, completion: { contact in
-                if let contact = contact {
+        
+        let request = CNContactFetchRequest(keysToFetch:
+            [CNContactGivenNameKey as CNKeyDescriptor,
+             CNContactFamilyNameKey as CNKeyDescriptor,
+             CNContactImageDataAvailableKey as CNKeyDescriptor,
+             CNContactThumbnailImageDataKey as CNKeyDescriptor,
+             CNContactPhoneNumbersKey as CNKeyDescriptor,
+             CNContactEmailAddressesKey as CNKeyDescriptor,
+             CNContactJobTitleKey as CNKeyDescriptor,
+             CNContactOrganizationNameKey as CNKeyDescriptor,
+             CNContactDepartmentNameKey as CNKeyDescriptor])
+        do {
+            try cnContactStore.enumerateContacts(with: request) { (contact, successful) in
+                // Only add those not already trashed
+                if self.trashed.contains(contact.identifier) {
                     trash.append(contact)
                 }
-            })
-        })
+            }
+        } catch {
+            checkForContactAccess()
+        }
+        
         return trash
     }
     
@@ -201,7 +216,8 @@ class ContactStore {
     }
     
     func delete(_ contact: CNContact) {
-        trashed.remove(at: trashed.index(of: contact.identifier)!)
+        guard let index = trashed.index(of: contact.identifier) else { return }
+        trashed.remove(at: index)
         let mutableContact = contact.mutableCopy() as! CNMutableContact
         let request = CNSaveRequest()
         request.delete(mutableContact)

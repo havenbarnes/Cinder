@@ -10,9 +10,9 @@ import UIKit
 import Contacts
 
 extension UIViewController {
-    func present(_ identifier: String) {
+    func present(_ identifier: String, completion: (() -> ())? = nil) {
         let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: identifier)
-        self.present(viewController, animated: true, completion: nil)
+        self.present(viewController, animated: true, completion: completion)
     }
 }
 

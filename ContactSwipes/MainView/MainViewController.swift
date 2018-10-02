@@ -39,17 +39,18 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
     
     func initUI() {
         view.layoutSubviews()
+        redoButton.layer.cornerRadius = redoButton.frame.width / 2
         keepButton.layer.cornerRadius = keepButton.frame.width / 2
         deleteButton.layer.cornerRadius = deleteButton.frame.width / 2
-        redoButton.layer.cornerRadius = redoButton.frame.width / 2
-        let path = UIBezierPath(roundedRect: trashButton.bounds,
+
+        let semiCirclePath = UIBezierPath(roundedRect: trashButton.bounds,
                                 byRoundingCorners:[.topRight, .bottomRight],
                                 cornerRadii: CGSize(width: trashButton.frame.height / 2,
                                                     height:  trashButton.frame.height / 2))
         
-        let maskLayer = CAShapeLayer()
-        maskLayer.path = path.cgPath
-        trashButton.layer.mask = maskLayer
+        let semiCircleMaskLayer = CAShapeLayer()
+        semiCircleMaskLayer.path = semiCirclePath.cgPath
+        trashButton.layer.mask = semiCircleMaskLayer
         trashButtonLeading.constant = -trashButton.frame.width // Start off screen
         redoButton.alpha = 0
         allDoneLabel.alpha = 0
@@ -117,7 +118,7 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
             cardStackContainerView.insertSubview(card, at: initialLoad ? contactStore.cardStack.count - 1 : 0)
             card.translatesAutoresizingMaskIntoConstraints = false
             
-            let attributes: [NSLayoutAttribute] = [.left, .right, .centerY]
+            let attributes: [NSLayoutConstraint.Attribute] = [.left, .right, .centerY]
             for attribute in attributes {
                 cardStackContainerView.addConstraint(NSLayoutConstraint(item: cardStackContainerView,
                     attribute: attribute, relatedBy: .equal, toItem: card, attribute: attribute,
@@ -142,11 +143,12 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
     func contactAccessStatusDidUpdate(_ accessStatus: CNAuthorizationStatus) {
         if accessStatus == .denied || accessStatus == .restricted {
             let title = "Contact Access Denied"
-            let message = "You can go to Settings to give Contact Swipes access to your contacts"
+            let message = "You can go to Settings to give Cinder access to your contacts"
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             let settingsAction = UIAlertAction(title: "Settings", style: .default, handler: { (action) in
-                let settingsUrl = URL(string: UIApplicationOpenSettingsURLString)!
-                UIApplication.shared.open(settingsUrl, options: [:], completionHandler: nil)
+                if let settingsUrl = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(settingsUrl, options: [:], completionHandler: nil)
+                }
             })
             alert.addAction(settingsAction)
             present(alert, animated: true)
@@ -240,15 +242,17 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
         }
     }
     
-    // MARK: - Button Actions
     @IBAction func trashButtonPressed(_ sender: Any) {
         guard !animating else { return }
-        present("TrashViewController")
+        animating = true
+        present("TrashViewController", completion: {
+            self.animating = false
+        })
     }
     
     @IBAction func deleteButtonPressed(_ sender: Any) {
         guard !animating else { return }
-        guard let topCard = cardManager.top else {
+        guard let topCard = cardManager?.top else {
             return
         }
         trash(topCard)
@@ -256,7 +260,7 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
     
     @IBAction func keepButtonPressed(_ sender: Any) {
         guard !animating else { return }
-        guard let topCard = cardManager.top else {
+        guard let topCard = cardManager?.top else {
             return
         }
         keep(topCard)
@@ -274,4 +278,3 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
         viewDidAppear(false)
     }
 }
-

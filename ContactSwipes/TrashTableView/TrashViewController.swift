@@ -16,7 +16,7 @@ class TrashViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     @IBOutlet weak var tableView: UITableView!
     
-    let interstitial = GADInterstitial(adUnitID: "ca-app-pub-6103293012504966/9853415237")
+    let interstitial = GADInterstitial(adUnitID: AdManager.interstitialAd)
     
     private var contacts: [CNContact] = []
     private var contactColorsArray: [CNContact] = []
@@ -109,31 +109,35 @@ class TrashViewController: UIViewController, UITableViewDelegate, UITableViewDat
         (adView.bodyView as! UILabel).text = nativeAd.body
         (adView.advertiserView as! UILabel).text = nativeAd.advertiser
         (adView.callToActionView as! UIButton).isUserInteractionEnabled = false
-        (adView.callToActionView as! UIButton).setTitle(nativeAd.callToAction, for: UIControlState.normal)
+        (adView.callToActionView as! UIButton).setTitle(nativeAd.callToAction, for: UIControl.State.normal)
         return nativeAdCell
     }
     
     func didRestore(contact: CNContact) {
         guard contacts.contains(contact) else { return }
-        let index = contacts.index(of: contact)!
-        contacts.remove(at: index)
-        tableView.reloadData()
-        ContactStore.shared.removeFromTrash(contact)
+        if let index = contacts.index(of: contact) {
+            contacts.remove(at: index)
+            ContactStore.shared.removeFromTrash(contact)
+        }
         dismissIfNeeded()
+        tableView.reloadData()
     }
     
     func didDelete(contact: CNContact) {
         guard contacts.contains(contact) else { return }
-        let index = contacts.index(of: contact)!
-        contacts.remove(at: index)
-        tableView.reloadData()
-        ContactStore.shared.delete(contact)
+        if let index = contacts.index(of: contact) {
+            contacts.remove(at: index)
+            ContactStore.shared.delete(contact)
+        }
         dismissIfNeeded()
+        tableView.reloadData()
     }
     
     func dismissIfNeeded() {
         if (contacts.count == 0) {
-            self.dismiss(animated: true, completion: nil)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                self.dismiss(animated: true, completion: nil)
+            }
         }
     }
     

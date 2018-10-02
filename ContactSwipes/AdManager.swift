@@ -10,13 +10,12 @@ import Foundation
 import GoogleMobileAds
 
 class AdManager: NSObject, GADUnifiedNativeAdLoaderDelegate {
+    
     static let shared = AdManager()
     
-    // Test
-    //let adUnitID = "ca-app-pub-3940256099942544/8407707713"
-    // Prod
-    let adUnitID = "ca-app-pub-6103293012504966/3824734522"
-    
+    static let bannerAd = "ca-app-pub-6103293012504966/3824734522"
+    static let interstitialAd = "ca-app-pub-6103293012504966/9853415237"
+
     private let numAdsToLoad = 5
     private var adLoader: GADAdLoader!
     var ads = [GADUnifiedNativeAd]()
@@ -24,7 +23,7 @@ class AdManager: NSObject, GADUnifiedNativeAdLoaderDelegate {
     func load() {
         let options = GADMultipleAdsAdLoaderOptions()
         options.numberOfAds = numAdsToLoad
-        adLoader = GADAdLoader(adUnitID: adUnitID,
+        adLoader = GADAdLoader(adUnitID: AdManager.bannerAd,
                                rootViewController: nil,
                                adTypes: [.unifiedNative],
                                options: [options])

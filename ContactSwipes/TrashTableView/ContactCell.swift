@@ -9,14 +9,14 @@
 import UIKit
 import Contacts
 
-protocol ContactCellDelegate {
+protocol ContactCellDelegate: class {
     func didRestore(contact: CNContact)
     func didDelete(contact: CNContact)
 }
 
 class ContactCell: UITableViewCell {
     
-    var delegate: ContactCellDelegate?
+    weak var delegate: ContactCellDelegate?
     
     @IBOutlet weak var initialsLabelBackground: UIView!
     @IBOutlet weak var contactImageView: UIImageView!
