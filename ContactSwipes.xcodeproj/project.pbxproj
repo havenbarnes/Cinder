@@ -17,7 +17,7 @@
 		814DF25820F1872000B32FBF /* TrashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814DF25720F1872000B32FBF /* TrashViewController.swift */; };
 		8173BB092002E7E700F09D7A /* ContactStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8173BB082002E7E700F09D7A /* ContactStore.swift */; };
 		8186BB21211D680C00C98DCB /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8186BB20211D680C00C98DCB /* ContactCell.swift */; };
-		8186BB25211F98A600C98DCB /* AdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8186BB24211F98A600C98DCB /* AdManager.swift */; };
+		8186BB25211F98A600C98DCB /* AdConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8186BB24211F98A600C98DCB /* AdConfig.swift */; };
 		81B3D8C32106D55C006870D6 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B3D8C22106D55C006870D6 /* StatsViewController.swift */; };
 		81CE02F01FF97F1800CFE7A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CE02EF1FF97F1800CFE7A8 /* AppDelegate.swift */; };
 		81CE02F21FF97F1800CFE7A8 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CE02F11FF97F1800CFE7A8 /* MainViewController.swift */; };
@@ -42,7 +42,7 @@
 		814DF25720F1872000B32FBF /* TrashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashViewController.swift; sourceTree = "<group>"; };
 		8173BB082002E7E700F09D7A /* ContactStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactStore.swift; sourceTree = "<group>"; };
 		8186BB20211D680C00C98DCB /* ContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
-		8186BB24211F98A600C98DCB /* AdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdManager.swift; sourceTree = "<group>"; };
+		8186BB24211F98A600C98DCB /* AdConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdConfig.swift; sourceTree = "<group>"; };
 		81B3D8C22106D55C006870D6 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 		81CE02EC1FF97F1800CFE7A8 /* ContactSwipes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContactSwipes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81CE02EF1FF97F1800CFE7A8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -143,7 +143,7 @@
 				8173BB082002E7E700F09D7A /* ContactStore.swift */,
 				810F926D200AB32300BEC27C /* CardManager.swift */,
 				813E108920FDD2C900B26E23 /* SoundManager.swift */,
-				8186BB24211F98A600C98DCB /* AdManager.swift */,
+				8186BB24211F98A600C98DCB /* AdConfig.swift */,
 				814DF25420F185ED00B32FBF /* MainView */,
 				81B3D8C12106D3E5006870D6 /* StatsView */,
 				814DF25620F186F700B32FBF /* TrashTableView */,
@@ -335,7 +335,7 @@
 				813E108A20FDD2C900B26E23 /* SoundManager.swift in Sources */,
 				814DF25820F1872000B32FBF /* TrashViewController.swift in Sources */,
 				81CE03051FF9808800CFE7A8 /* ContactCardView.swift in Sources */,
-				8186BB25211F98A600C98DCB /* AdManager.swift in Sources */,
+				8186BB25211F98A600C98DCB /* AdConfig.swift in Sources */,
 				81CE02F21FF97F1800CFE7A8 /* MainViewController.swift in Sources */,
 				810F926E200AB32300BEC27C /* CardManager.swift in Sources */,
 				81CE02F01FF97F1800CFE7A8 /* AppDelegate.swift in Sources */,

@@ -35,15 +35,6 @@ class ContactStore {
     private var cnContactStore = CNContactStore()
     private var accessStatus: CNAuthorizationStatus? = nil
 
-    private static let deletedCountKey = "deletedCountKey"
-    private var deletedCount: Int {
-        get {
-            return UserDefaults.standard.integer(forKey: ContactStore.deletedCountKey)
-        }
-        set (newValue){
-            UserDefaults.standard.set(newValue, forKey: ContactStore.deletedCountKey)
-        }
-    }
     private static let totalCountKey = "totalCountKey"
     private var totalCount: Int {
         get {
@@ -64,6 +55,16 @@ class ContactStore {
         }
     }
     
+    private static let deletedCountKey = "deletedCountKey"
+    private var deletedCount: Int {
+        get {
+            return UserDefaults.standard.integer(forKey: ContactStore.deletedCountKey)
+        }
+        set (newValue){
+            UserDefaults.standard.set(newValue, forKey: ContactStore.deletedCountKey)
+        }
+    }
+
     private static let trashedContactsKey = "trashedContactsKey"
     private var trashed: [String] {
         get {
@@ -212,13 +213,14 @@ class ContactStore {
     }
     
     func removeFromTrash(_ contact: CNContact) {
-        trashed.remove(at: trashed.index(of: contact.identifier)!)
+        guard let trashedContact = trashed.index(of: contact.identifier) else { return }
+        trashed.remove(at: trashedContact)
     }
     
     func delete(_ contact: CNContact) {
         guard let index = trashed.index(of: contact.identifier) else { return }
         trashed.remove(at: index)
-        let mutableContact = contact.mutableCopy() as! CNMutableContact
+        guard let mutableContact = contact.mutableCopy() as? CNMutableContact else { return }
         let request = CNSaveRequest()
         request.delete(mutableContact)
         try? cnContactStore.execute(request)

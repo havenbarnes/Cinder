@@ -112,7 +112,7 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
     
     func generateCard(_ contact: CNContact, index: Int, initialLoad: Bool = true) -> ContactCardView? {
         if let card = Bundle.main.loadNibNamed("ContactCardView", owner: nil, options: nil)?
-            .first as! ContactCardView? {
+            .first as? ContactCardView {
             card.contact = contact
             card.contactIndex = index
             cardStackContainerView.insertSubview(card, at: initialLoad ? contactStore.cardStack.count - 1 : 0)

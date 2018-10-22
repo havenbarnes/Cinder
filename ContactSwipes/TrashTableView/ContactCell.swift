@@ -59,18 +59,18 @@ class ContactCell: UITableViewCell {
             contactImageView.image = nil
         }
         
-        if contact.phoneNumbers.count == 0 {
+        if let phoneNumber = contact.phoneNumbers.first {
+            phoneLabel.text = phoneNumber.value.stringValue
+        } else {
             phoneLabel.text = "No Phone"
             phoneLabel.alpha = 0.4
-        } else {
-            phoneLabel.text = contact.phoneNumbers.first!.value.stringValue
         }
         
-        if contact.emailAddresses.count == 0 {
+        if let emailAddress = contact.emailAddresses.first {
+            emailLabel.text = emailAddress.value as String
+        } else {
             emailLabel.text = "No Email"
             emailLabel.alpha = 0.4
-        } else {
-            emailLabel.text = contact.emailAddresses.first!.value as String
         }
     }
     

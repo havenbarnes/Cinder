@@ -58,7 +58,7 @@ class CardManager {
             delegate?.dragStarted()
         }
         
-        let cardView = sender.view! as! ContactCardView
+        guard let cardView = sender.view as? ContactCardView else { return }
         view.bringSubviewToFront(cardView)
         
         // Transition X
@@ -77,14 +77,15 @@ class CardManager {
         // Reset translation for easier calculation
         sender.setTranslation(CGPoint.zero, in: self.view)
         
-        // Check For Drag Completion
+        // Check For drag completion
         guard sender.state == .ended else { return }
+        guard let top = top else { return }
         if cardView.frame.minX <= -60 {
-            delegate?.dragDidCompletePastBoundary(card: top!, isRight: false)
+            delegate?.dragDidCompletePastBoundary(card: top, isRight: false)
         } else if cardView.frame.maxX >= view.frame.width + 60 {
-            delegate?.dragDidCompletePastBoundary(card: top!, isRight: true)
+            delegate?.dragDidCompletePastBoundary(card: top, isRight: true)
         } else {
-            delegate?.draggedCardShouldReturn(card: top!)
+            delegate?.draggedCardShouldReturn(card: top)
         }
     }
     
