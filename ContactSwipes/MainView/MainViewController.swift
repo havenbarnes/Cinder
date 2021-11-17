@@ -9,8 +9,9 @@
 import UIKit
 import Contacts
 import Crashlytics
+import GoogleMobileAds
 
-class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDelegate {
+class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDelegate, GADInterstitialDelegate {
     
     private let animationTime = 0.3
     private var animating = false
@@ -26,6 +27,8 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
     @IBOutlet weak var redoButton: UIButton!
     @IBOutlet weak var allDoneLabel: UILabel!
     @IBOutlet weak var progressIndicator: UIActivityIndicatorView!
+
+    var interstitial: GADInterstitial!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +37,14 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
         contactStore.delegate = self
 
         setNeedsStatusBarAppearanceUpdate()
+        initAd()
         initUI()
+    }
+
+    func initAd() {
+        self.interstitial = GADInterstitial(adUnitID: AdConfig.interstitialAdId)
+        self.interstitial.load(GADRequest())
+        self.interstitial.delegate = self
     }
     
     func initUI() {
@@ -54,8 +64,12 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
         trashButtonLeading.constant = -trashButton.frame.width // Start off screen
         redoButton.alpha = 0
         allDoneLabel.alpha = 0
-    }
 
+        if #available(iOS 13.0, *) {
+            overrideUserInterfaceStyle = .light
+        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
@@ -120,7 +134,7 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
             
             let attributes: [NSLayoutConstraint.Attribute] = [.left, .right, .centerY]
             for attribute in attributes {
-                cardStackContainerView.addConstraint(NSLayoutConstraint(item: cardStackContainerView,
+                cardStackContainerView.addConstraint(NSLayoutConstraint(item: cardStackContainerView!,
                     attribute: attribute, relatedBy: .equal, toItem: card, attribute: attribute,
                     multiplier: 1, constant: 0))
             }
@@ -188,6 +202,7 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
             }
             self.cardManager.update()
         }
+        showInterstitialIfNeeded()
     }
     
     func trash(_ card: ContactCardView) {
@@ -208,6 +223,16 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
                 self.addCardToStack(contactData: (newContact, card.contactIndex + 1))
             }
            self.cardManager.update()
+        }
+        showInterstitialIfNeeded()
+    }
+
+    func showInterstitialIfNeeded() {
+        let seenCount = self.contactStore.getStats()["seenCount"] ?? 0
+        if seenCount % 25 == 0 && seenCount != 0 {
+            if self.interstitial.isReady {
+                self.interstitial.present(fromRootViewController: self)
+            }
         }
     }
     
@@ -276,5 +301,9 @@ class MainViewController: UIViewController, ContactStoreDelegate, CardManagerDel
         shouldLoadStack = true
         contactStore.refillDeck()
         viewDidAppear(false)
+    }
+
+    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+        initAd()
     }
 }

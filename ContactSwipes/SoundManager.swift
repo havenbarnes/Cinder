@@ -19,28 +19,15 @@ enum Sound: String {
 class SoundManager {
     static let shared = SoundManager()
     
-    private var player: AVAudioPlayer?
+    private var player: AVPlayer?
     
     func play(sound: Sound) {
         guard let url = Bundle.main.url(forResource: sound.rawValue, withExtension: "wav") else { return }
         
-        do {
-            try AVAudioSession.sharedInstance().setCategory(.ambient, mode: .default, options: .defaultToSpeaker)
-            try AVAudioSession.sharedInstance().setActive(true)
-            
-            player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.wav.rawValue)
-            
-            guard let player = player else { return }
-            
-            player.play()
-            
-        } catch let error {
-            print(error.localizedDescription)
-        }
+//        try AVAudioSession.sharedInstance().setCategory(.ambient, mode: .default, options: .defaultToSpeaker)
+//        try AVAudioSession.sharedInstance().setActive(true)
+    
+        let player = AVPlayer(url: url)
+        player.play()
     }
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromAVAudioSessionCategory(_ input: AVAudioSession.Category) -> String {
-	return input.rawValue
 }

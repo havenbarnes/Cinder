@@ -26,6 +26,10 @@ class TrashViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         interstitial.load(GADRequest())
         interstitial.delegate = self
+
+        if #available(iOS 13.0, *) {
+            overrideUserInterfaceStyle = .light
+        }
         
         loadTable {
             self.tableView.delegate = self
@@ -76,7 +80,7 @@ class TrashViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
         let contact = contacts[indexPath.row - indexPath.row / 5]
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContactCell", for: indexPath) as! ContactCell
-        cell.contactData = (contact, contactColorsArray.index(of: contact) ?? 0)
+        cell.contactData = (contact, contactColorsArray.firstIndex(of: contact) ?? 0)
         cell.delegate = self
         return cell
     }
@@ -87,7 +91,7 @@ class TrashViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func didRestore(contact: CNContact) {
         guard contacts.contains(contact) else { return }
-        if let index = contacts.index(of: contact) {
+        if let index = contacts.firstIndex(of: contact) {
             contacts.remove(at: index)
             ContactStore.shared.removeFromTrash(contact)
         }
@@ -97,7 +101,7 @@ class TrashViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func didDelete(contact: CNContact) {
         guard contacts.contains(contact) else { return }
-        if let index = contacts.index(of: contact) {
+        if let index = contacts.firstIndex(of: contact) {
             contacts.remove(at: index)
             ContactStore.shared.delete(contact)
         }
@@ -116,18 +120,24 @@ class TrashViewController: UIViewController, UITableViewDelegate, UITableViewDat
     // MARK: - Interstitial Delegate
     /// Tells the delegate the interstitial is to be animated off the screen.
     func interstitialWillDismissScreen(_ ad: GADInterstitial) {
-        self.dismiss(animated: true, completion: nil)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     /// Tells the delegate the interstitial had been animated off the screen.
     func interstitialDidDismissScreen(_ ad: GADInterstitial) {
-        self.dismiss(animated: true, completion: nil)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     /// Tells the delegate that a user click will open another app
     /// (such as the App Store), backgrounding the current app.
     func interstitialWillLeaveApplication(_ ad: GADInterstitial) {
-        self.dismiss(animated: true, completion: nil)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     @IBAction func deleteAllButtonPressed(_ sender: Any) {
@@ -143,7 +153,9 @@ class TrashViewController: UIViewController, UITableViewDelegate, UITableViewDat
             if self.interstitial.isReady {
                 self.interstitial.present(fromRootViewController: self)
             } else {
-                self.dismiss(animated: true, completion: nil)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                    self.dismiss(animated: true, completion: nil)
+                }
             }
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))

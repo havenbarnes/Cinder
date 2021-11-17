@@ -21,6 +21,10 @@ class StatsViewController: UIViewController {
         progressFractionLabel.text = "\(stats["seenCount"] ?? 0)/\(stats["totalCount"] ?? 0)"
         deletedLabel.text = "\(stats["deletedCount"] ?? 0)"
         deletedLabelPlurality.text = stats["deletedCount"] == 1 ? "Contact" : "Contacts"
+
+        if #available(iOS 13.0, *) {
+            overrideUserInterfaceStyle = .light
+        }
     }
 
     @IBAction func resetProgressPressed(_ sender: Any) {

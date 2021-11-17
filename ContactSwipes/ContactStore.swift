@@ -213,12 +213,12 @@ class ContactStore {
     }
     
     func removeFromTrash(_ contact: CNContact) {
-        guard let trashedContact = trashed.index(of: contact.identifier) else { return }
+        guard let trashedContact = trashed.firstIndex(of: contact.identifier) else { return }
         trashed.remove(at: trashedContact)
     }
     
     func delete(_ contact: CNContact) {
-        guard let index = trashed.index(of: contact.identifier) else { return }
+        guard let index = trashed.firstIndex(of: contact.identifier) else { return }
         trashed.remove(at: index)
         guard let mutableContact = contact.mutableCopy() as? CNMutableContact else { return }
         let request = CNSaveRequest()
@@ -228,13 +228,22 @@ class ContactStore {
     }
     
     func emptyTrash() {
+        let request = CNSaveRequest()
         for identifier in trashed {
             fetchContact(identifier, completion: { contact in
                 if let contact = contact {
-                    self.delete(contact)
+                    guard let index = self.trashed.firstIndex(of: contact.identifier) else { return }
+                    guard let mutableContact = contact.mutableCopy() as? CNMutableContact else { return }
+                    self.trashed.remove(at: index)
+                    request.delete(mutableContact)
                 }
             })
         }
+
+        try? cnContactStore.execute(request)
+
+        deletedCount = deletedCount + trashed.count
+
         trashed.removeAll()
         seenCount = approved.count
     }
